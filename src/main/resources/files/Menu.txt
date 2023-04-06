@@ -1,44 +1,43 @@
 #FOOD
 	/Salads
-		-Greek Salad
-		-Traditional Cretan Ntakos
-		-Politiki
-		-Ceasar Salad
+		-Greek Salad €12
+		-Traditional Cretan Ntakos €4
+		-Politiki €9
+		-Ceasar Salad €10
 
 	/Starters
-		-Tzatziki
-		-Tyrokafteri
-		-Feta Cheese
-		-Zucchini balls
+		-Tzatziki €3
+		-Tyrokafteri €2
+		-Feta Cheese €4
+		-Zucchini balls €2
 
 	/SeaFood
-		-Fried Squid
-		-Grilled Squid
-		-Grilled Octapus
-		-Fresh Fishes
+		-Fried Squid €17
+		-Grilled Squid €15
+		-Grilled Octapus €22
+		-Fresh Fishes €19
 
 	/Dance
-		-Twerk
-
+		-Twerk €100
 
 
 #DRINKS
 	/Beers
-		-Mythos
-		-Amstel
+		-Mythos €2
+		-Amstel €2
 
 	/Coctails
-		-Sex on the beach
-		-Mochito
+		-Sex on the beach €14
+		-Mochito €8
 
 	/Wine
-		-Red Wine
-		-White Wine
+		-Red Wine €40
+		-White Wine €30
 
 
 #EXTRAS
 	/Ice cream
-		-Banana
-		-Chocolate
+		-Banana €1
+		-Chocolate €1
 
 

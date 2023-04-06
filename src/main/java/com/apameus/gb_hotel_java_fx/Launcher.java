@@ -17,7 +17,7 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("employee/newOrder.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("employee/newOrder2.fxml"));
 
         stage.getIcons().add(new Image("C:\\Users\\Ιωάννης Τζωρτζίνης\\IdeaProjects\\GB Hotel -JAVA FX\\src\\main\\resources\\images\\hotelIcon.png"));
         stage.setTitle("GΒ HOTEL APPLICATION");

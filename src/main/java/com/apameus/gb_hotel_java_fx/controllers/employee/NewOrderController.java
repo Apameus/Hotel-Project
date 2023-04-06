@@ -3,11 +3,10 @@ package com.apameus.gb_hotel_java_fx.controllers.employee;
 import com.apameus.gb_hotel_java_fx.menu.Menu;
 import com.apameus.gb_hotel_java_fx.serializers.MenuSerializer;
 import com.apameus.gb_hotel_java_fx.util.Util;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,7 +32,7 @@ public final class NewOrderController implements Initializable {
         orderTree.setShowRoot(false);
 
 
-        Util.setMenuTree(menu, menuTree);
+        setMenuTree(menu, menuTree);
     }
 
 
@@ -54,4 +53,26 @@ public final class NewOrderController implements Initializable {
 
     }
 
+
+    public static void setMenuTree(Menu menu, TreeView<String> menuTree) {
+        TreeItem<String> rootItem = new TreeItem<>("Menu");
+        for (Menu.Category category : menu.getCategories()) {
+            TreeItem<String> item = new TreeItem<>(category.name());
+            rootItem.getChildren().add(item);
+
+            for (String sub_category : category.subCategories()) {
+                TreeItem<String> sub_item = new TreeItem<>(sub_category);
+                item.getChildren().add(sub_item);
+
+                for (Menu.Option option : category.subCategory_Options().get(sub_category)) {
+                    TreeItem<String> sub_item_option = new TreeItem<>(option.name());
+                    sub_item.getChildren().add(sub_item_option);
+                }
+
+            }
+        }
+
+        menuTree.setRoot(rootItem);
+        menuTree.setShowRoot(false);
+    }
 }
