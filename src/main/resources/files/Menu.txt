@@ -1,0 +1,44 @@
+#FOOD
+	/Salads
+		-Greek Salad
+		-Traditional Cretan Ntakos
+		-Politiki
+		-Ceasar Salad
+
+	/Starters
+		-Tzatziki
+		-Tyrokafteri
+		-Feta Cheese
+		-Zucchini balls
+
+	/SeaFood
+		-Fried Squid
+		-Grilled Squid
+		-Grilled Octapus
+		-Fresh Fishes
+
+	/Dance
+		-Twerk
+
+
+
+#DRINKS
+	/Beers
+		-Mythos
+		-Amstel
+
+	/Coctails
+		-Sex on the beach
+		-Mochito
+
+	/Wine
+		-Red Wine
+		-White Wine
+
+
+#EXTRAS
+	/Ice cream
+		-Banana
+		-Chocolate
+
+

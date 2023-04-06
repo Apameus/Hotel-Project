@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0F3325;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.apameus.gb_hotel_java_fx.controllers.LoginController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="400.0" fitWidth="226.0" layoutX="-5.0">
+               <image>
+                  <Image url="@../../../images/JungleImage.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="400.0" prefWidth="379.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="28.0" layoutY="141.0" text="Username" textFill="#eae7b1">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="209.0" text="Password" textFill="#eae7b1">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="loginButton" layoutX="225.0" layoutY="302.0" mnemonicParsing="false" onAction="#login" prefHeight="35.0" prefWidth="112.0" style="-fx-background-color: EAE7B1;" text="Log In" />
+            <Button fx:id="registerButton" layoutX="54.0" layoutY="303.0" mnemonicParsing="false" onAction="#register" prefHeight="34.0" prefWidth="112.0" style="-fx-background-color: EAE7B1;" text="Register" />
+            <TextField fx:id="usernameField" layoutX="166.0" layoutY="144.0" promptText="Admin" />
+            <PasswordField fx:id="passwordField" layoutX="166.0" layoutY="212.0" promptText="Admin" />
+            <Text layoutX="120.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GB HOTEL">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.2797798812389374" green="0.5789473652839661" blue="0.09381091594696045" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Label fx:id="notificationLabel" layoutX="65.0" layoutY="258.0" prefHeight="20.0" prefWidth="251.0" textFill="RED">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

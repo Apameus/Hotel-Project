@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #40513b;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.apameus.gb_hotel_java_fx.controllers.employee.NewOrderController">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="187.0">
+         <children>
+            <Text fill="#edf1d6" strokeType="OUTSIDE" strokeWidth="0.0" text="Order:" textAlignment="CENTER" wrappingWidth="185.9830722808838">
+               <font>
+                  <Font name="Book Antiqua Bold Italic" size="36.0" />
+               </font>
+            </Text>
+            <TreeView fx:id="orderTree" onContextMenuRequested="#selectItem" onMouseClicked="#removeItem" prefHeight="357.0" prefWidth="211.0" style="-fx-background-color: #40513B;" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Text fill="#edf1d6" strokeType="OUTSIDE" strokeWidth="0.0" text="Total:" textAlignment="CENTER" wrappingWidth="108.98307228088379">
+                     <font>
+                        <Font name="Book Antiqua Bold Italic" size="36.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="totalCostNumber" fill="#edf1d6" strokeType="OUTSIDE" strokeWidth="0.0" text="0$" textAlignment="CENTER" wrappingWidth="108.98307228088379">
+                     <font>
+                        <Font name="Book Antiqua Bold Italic" size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <TreeView fx:id="menuTree" layoutX="237.0" layoutY="81.0" onContextMenuRequested="#selectItem" onMouseClicked="#selectItem" prefHeight="293.0" prefWidth="321.0" style="-fx-background-color: #40513B;" />
+      <Text fill="#edf1d6" layoutX="253.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Restaraunt Menu:" wrappingWidth="294.0">
+         <font>
+            <Font name="Book Antiqua Bold Italic" size="36.0" />
+         </font>
+      </Text>
+      <Button fx:id="addButton" layoutX="506.0" layoutY="341.0" mnemonicParsing="false" onAction="#addToTheOrder" style="-fx-background-color: #434c40;" text="ADD" textFill="#edf1d6" />
+   </children>
+</AnchorPane>

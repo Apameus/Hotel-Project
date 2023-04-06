@@ -1,0 +1,62 @@
+#RESTAURANT
+	/
+		-First_Name: Stavroula
+		-Last_Name: Xatzixristou
+		-Email: stav@gmail.com
+		-Phone_Number: 6911223344
+
+		-Registered_To_App: 04/05/2023
+
+		-Daily_Orders_Delivered: 2
+		-Monthly_Orders_Delivered: 60
+		-Total_Orders_Delivered: 240
+
+		-Daily_Orders_Income: 40
+		-Monthly_Orders_Income: 1200
+		-Total_Orders_Income: 4800
+
+		-Points: 0
+
+		-Salary: 720
+		-Bonus: 0
+	/
+		-First_Name: Dimitra
+		-Last_Name: Titaki
+		-Email: titaki@gmail.com
+		-Phone_Number: 6955667788
+
+		-Registered_To_App: 13/06/2023
+
+		-Daily_Orders_Delivered: 7
+		-Monthly_Orders_Delivered: 210
+		-Total_Orders_Delivered: 210
+
+		-Daily_Orders_Income: 280
+		-Monthly_Orders_Income: 8400
+		-Total_Orders_Income: 8400
+
+		-Points: 40
+
+		-Salary: 720
+		-Bonus: 20
+#BAR
+	/
+		-First_Name: Xristina
+		-Last_Name: Manouseli
+		-Email: xristina@gmail.com
+		-Phone_Number: 6955662348
+
+		-Registered_To_App: 03/06/2023
+
+		-Daily_Orders_Delivered: 7
+		-Monthly_Orders_Delivered: 210
+		-Total_Orders_Delivered: 210
+
+		-Daily_Orders_Income: 280
+		-Monthly_Orders_Income: 8400
+		-Total_Orders_Income: 8400
+
+		-Points: 40
+
+		-Salary: 720
+		-Bonus: 20
