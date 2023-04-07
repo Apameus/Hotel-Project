@@ -82,7 +82,7 @@ public class MenuSerializer {
         String optionName = lineSplit[0];
         Integer optionPrice = Integer.parseInt(lineSplit[1]);
 
-        Menu.Option option = new Menu.Option(optionName, optionPrice);
-        return option;
+        return new Menu.Option(optionName, optionPrice);
+
     }
 }

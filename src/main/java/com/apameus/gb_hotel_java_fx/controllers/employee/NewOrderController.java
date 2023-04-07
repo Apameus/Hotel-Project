@@ -68,11 +68,30 @@ public final class NewOrderController implements Initializable {
                     TreeItem<String> sub_item_option = new TreeItem<>(option.name());
                     sub_item.getChildren().add(sub_item_option);
                 }
-
             }
         }
-
         menuTree.setRoot(rootItem);
         menuTree.setShowRoot(false);
+    }
+
+    public static void setMenuTreeWithStreamAPI(Menu menu, TreeView<String> menuTree) {
+        TreeItem<String> rootItem = new TreeItem<>("Menu");
+        menu.getCategories().forEach(category -> {
+            TreeItem<String> item = new TreeItem<>(category.name());
+            rootItem.getChildren().add(item);
+
+            category.subCategories().forEach(subCategory -> {
+                TreeItem<String> sub_item = new TreeItem<>(subCategory);
+                item.getChildren().add(sub_item);
+
+                category.subCategory_Options().get(subCategory).forEach(option -> {
+                    TreeItem<String> sub_item_option = new TreeItem<>(option.name());
+                    sub_item.getChildren().add(sub_item_option);
+                });
+            });
+        });
+        menuTree.setRoot(rootItem);
+        menuTree.setShowRoot(false);
+
     }
 }
