@@ -28,13 +28,10 @@ public final class NewOrderController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Menu menu = new Menu();
         MenuSerializer.parse();
-        orderTree.setRoot(rootOrder);
-        orderTree.setShowRoot(false);
 
-
+        setOrderTree();
         setMenuTree(menu, menuTree);
     }
-
 
 
     public void removeItem(){
@@ -53,6 +50,11 @@ public final class NewOrderController implements Initializable {
 
     }
 
+
+    private void setOrderTree() {
+        orderTree.setRoot(rootOrder);
+        orderTree.setShowRoot(false);
+    }
 
     public static void setMenuTree(Menu menu, TreeView<String> menuTree) {
         TreeItem<String> rootItem = new TreeItem<>("Menu");

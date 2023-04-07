@@ -19,37 +19,24 @@ import java.util.ResourceBundle;
 public final class NewOrderController2 implements Initializable {
 
 
-    public void selectItem(ContextMenuEvent event) {
-    }
-
-    public void addToTheOrder(MouseEvent mouseEvent) {
-    }
-
-
     public static class Example {
-        private StringProperty name;
-        private LongProperty price;
-//        private LongProperty lastModified;
 
+        private StringProperty name;
+
+        private StringProperty price;
 //        private ListProperty<String> subCategories;
 //        private MapProperty<String, Menu.Option> subCategory_Options;
 
-        public Example(String name, long price) {
+        public Example(String name, String price) {
             setName(name);
             setPrice(price);
-//            setLastModified(size);
-
         }
+        private void setPrice(String price) {priceProperty().set(price);}
 
-        private void setPrice(long price) {
-            priceProperty().set(price);
-        }
-
-        private LongProperty priceProperty() {
-            if (price == null) price = new SimpleLongProperty(this, "price");
+        private StringProperty priceProperty() {
+            if (price == null) price = new SimpleStringProperty(this, "price");
             return price;
         }
-
 
         public void setName(String value) { nameProperty().set(value); }
 
@@ -58,74 +45,102 @@ public final class NewOrderController2 implements Initializable {
             return name;
         }
 
-//        public void setLastModified(long value) { lastModifiedProperty().set(value); }
-
-//        public LongProperty lastModifiedProperty() {
-//            if (lastModified == null) lastModified = new SimpleLongProperty(this, "lastModified");
-//            return lastModified;
-//        }
-
-//
         public String getName() { return nameProperty().get(); }
-        public long getPrice() { return priceProperty().get(); }
+
+        public String getPrice() { return priceProperty().get(); }
+
     }
-
-
     @FXML
     private TreeTableView<Example> orderTreeTable;
 
     @FXML
     private TreeTableView<Example> menuTreeTable;
-
     @FXML
     private TreeTableColumn<Example, String> nameColumn = new TreeTableColumn<>("Name");
 
     @FXML
-    private TreeTableColumn<Example, Long> priceColumn = new TreeTableColumn<>("Price");
+    private TreeTableColumn<Example, String> priceColumn = new TreeTableColumn<>("Price");
+    @FXML
+    private TreeTableColumn<Example, String> orderItemName = new TreeTableColumn<>("Name");
+
+    @FXML
+    private TreeTableColumn<Example, String> orderItemPrice = new TreeTableColumn<>("Price");
+    @FXML
+    private TreeTableColumn<Example, String> orderItemAmount = new TreeTableColumn<>("Name");
+
+    @FXML
+    private Button addButton = new Button();
+    @FXML
+    private Button removeButton = new Button();
+
+    TreeItem<Example> rootOrder = new TreeItem<>(new Example("MOLON LAVE", ""));
+    private TreeItem<Example> selectedItem;
+
+
 
 //    private final ObservableList<File> dataList = FXCollections.observableArrayList();
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Menu menu = MenuSerializer.parse();
 
-        Example rootExample = new Example("MOLON LAVE", 900);
+        setOrderTree();
+        setMenuTree(menu);
+    }
+
+    @FXML
+    public void selectItem(ContextMenuEvent event) {
+        selectedItem = menuTreeTable.getSelectionModel().getSelectedItem();
+    }
+
+    @FXML
+    public void addToTheOrder(MouseEvent mouseEvent) {
+        if (selectedItem != null){
+            rootOrder.getChildren().add(selectedItem);
+        }
+    }
+
+    @FXML
+    public void removeFromTheOrder(MouseEvent mouseEvent) {
+        if (selectedItem != null){
+            rootOrder.getChildren().remove(selectedItem);
+        }
+    }
+
+
+
+    private void setOrderTree() {
+        orderTreeTable.setRoot(rootOrder);
+        orderTreeTable.setShowRoot(false);
+    }
+
+    private void setMenuTree(Menu menu) {
+        Example rootExample = new Example("MOLON LAVE", "");
         TreeItem<Example> root = new TreeItem<>(rootExample);
 
         List<Menu.Category> categories = menu.getCategories();
         categories.forEach( category -> {
-            TreeItem<Example> category_item = new TreeItem<>(new Example(category.name(), 0));
+            TreeItem<Example> category_item = new TreeItem<>(new Example(category.name(), ""));
             root.getChildren().add(category_item);
 
             category.subCategories().forEach(subCategory -> {
-                TreeItem<Example> subCategory_item = new TreeItem<>(new Example(subCategory, 0));
+                TreeItem<Example> subCategory_item = new TreeItem<>(new Example(subCategory, ""));
                 category_item.getChildren().add(subCategory_item);
 
 
                 category.subCategory_Options().get(subCategory).forEach(option -> {
-                    TreeItem<Example> option_item = new TreeItem<>(new Example(option.name(),  option.price().longValue() ));
+                    TreeItem<Example> option_item = new TreeItem<>(new Example(option.name(),  option.price().toString() ));
                     subCategory_item.getChildren().add(option_item);
                 });
             });
         });
 
-//
-//        List<Files> files = List.of(
-//                new Category("Cat.png", 300),
-//                new Category("Dog.png", 500),
-//                new Category("Bird.png", 100));
-//
-//        files.forEach(file -> root.getChildren().add(new TreeItem<>(file)));
-
         menuTreeTable.setRoot(root);
-
+        menuTreeTable.setShowRoot(false);
         nameColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>(rootExample.nameProperty().getName()));
         priceColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>(rootExample.priceProperty().getName()));
 
 //        menuTreeTable.getColumns().setAll(nameColumn, priceColumn);
-
 //        menuTreeTable.getColumns().addAll(nameColumn,priceColumn);
     }
 
