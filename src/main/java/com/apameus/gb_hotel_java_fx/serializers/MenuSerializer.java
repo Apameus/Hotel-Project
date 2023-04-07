@@ -27,8 +27,10 @@ public class MenuSerializer {
                 category = new Menu.Category(name, subCategories, subCategory_Options);
                 addCategoryToTheList_IfNotEmptyOrNew(category, name);
 
-                subCategories = new ArrayList<>();
-                subCategory_Options = new HashMap<>();
+                if (!subCategories.isEmpty()){
+                    subCategories = new ArrayList<>();
+                    subCategory_Options = new HashMap<>();
+                }
 
                 name = line.split("#")[1];
             }
