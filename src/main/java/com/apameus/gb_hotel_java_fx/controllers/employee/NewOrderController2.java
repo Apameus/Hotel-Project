@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -88,6 +89,8 @@ public final class NewOrderController2 implements Initializable {
     private Button addButton = new Button();
     @FXML
     private Button removeButton = new Button();
+    @FXML
+    private Text totalCostNumber;
 
 
     Example rootExample = new Example("MOLON LAVE", "");
@@ -107,6 +110,14 @@ public final class NewOrderController2 implements Initializable {
 
         setOrderTree();
         setMenuTree(menu);
+    }
+
+    private void updateTotalCostNumber() {
+        int totalCost = 0;
+        for (TreeItem<Example> item : rootOrder.getChildren()) {
+            totalCost += Integer.parseInt(item.getValue().getPrice()) * item.getValue().getAmount();
+        }
+        totalCostNumber.setText(Integer.toString(totalCost));
     }
 
     @FXML
@@ -129,10 +140,14 @@ public final class NewOrderController2 implements Initializable {
             rootOrder.getChildren().add(menuSelectedItem);
 
             names.add(menuSelectedItem.getValue().getName());
+
+            updateTotalCostNumber();
             return;
         }
 
         increaseAmountOfExistedItem();
+
+        updateTotalCostNumber();
         //
 //        rootOrder.getChildren().forEach(item -> {
 //            if (item.getValue().getName().equals(menuSelectedItem.getValue().getName())) {
@@ -143,7 +158,6 @@ public final class NewOrderController2 implements Initializable {
 //            }
 //        });
         //
-
 
     }
 
@@ -181,6 +195,8 @@ public final class NewOrderController2 implements Initializable {
                     if (orderSelectedItem.getValue().getAmount() <= 1){
                         rootOrder.getChildren().remove(orderSelectedItem);
                         names.remove(name);
+
+                        updateTotalCostNumber();
                         return;
                     }
                     else {
@@ -196,6 +212,7 @@ public final class NewOrderController2 implements Initializable {
                 }
             }
         }
+        updateTotalCostNumber();
     }
 
 
