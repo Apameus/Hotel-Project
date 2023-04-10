@@ -1,7 +1,6 @@
 package com.apameus.gb_hotel_java_fx.serializers;
 
 
-import com.apameus.gb_hotel_java_fx.Launcher;
 import com.apameus.gb_hotel_java_fx.menu.Menu;
 import com.apameus.gb_hotel_java_fx.util.Util;
 
@@ -11,7 +10,7 @@ public class MenuSerializer {
 
 
     public static Menu parse(){
-        Menu menu = new Menu(); //toDo remove this sh*t
+        Menu menu = new Menu();
 
         List<String> lines = Util.getAllLines(Menu.PATH);
         lines.removeAll(Collections.singleton(""));
@@ -26,7 +25,7 @@ public class MenuSerializer {
         for (var line : lines){
             if (line.startsWith("#")){
                 category = new Menu.Category(name, subCategories, subCategory_Options);
-                addCategoryToTheList_IfNotEmptyOrNew(category, name);
+                addCategoryToTheList_IfNotEmptyOrNew(menu, category, name);
 
                 if (!subCategories.isEmpty()){
                     subCategories = new ArrayList<>();
@@ -71,9 +70,9 @@ public class MenuSerializer {
     }
 
 
-    private static void addCategoryToTheList_IfNotEmptyOrNew(Menu.Category category, String previousName) {
+    private static void addCategoryToTheList_IfNotEmptyOrNew(Menu menu, Menu.Category category, String previousName) {
         if (!category.name().equals("") || !category.name().equals(previousName)){
-            Menu.addCategory(category);
+            menu.addCategory(category);
         }
 
     }

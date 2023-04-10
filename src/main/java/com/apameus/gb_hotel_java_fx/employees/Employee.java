@@ -3,6 +3,7 @@ package com.apameus.gb_hotel_java_fx.employees;
 import com.apameus.gb_hotel_java_fx.orders.Order;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 
 public final class Employee {
     public static final Path PATH = Path.of("C:\\Users\\Ιωάννης Τζωρτζίνης\\IdeaProjects\\GB Hotel -JAVA FX\\src\\main\\resources\\files\\Employees.txt");
@@ -38,23 +39,27 @@ public final class Employee {
         this.dailyOrdersIncome += order.amount();
         this.monthlyOrdersIncome += order.amount();
         this.totalOrdersIncome += order.amount();
-
     }
 
-//    public void newOrder(){
-//        int atTable;
-//
-//        boolean next = true;
-//        while (next) {
-//            String categoryName;
-//            Category selectedCategory = categoryName_Category.get(categoryName);
-//            selectedCategory.subCategories();
-//        }
-//        // add the status
-//        {
-//            dailyOrdersDelivered++;
-//        }
-//    }
+    public void refresh(LocalDate date){ // ToDo refresh();
+        // if a day passed -> refreshDaily;
+        // if a month passed -> refreshMonthly;
+        // if the season ended -> refreshTotal;
+    }
 
+    private void refreshDaily(){
+        this.dailyOrdersDelivered = 0;
+        this.dailyOrdersIncome = 0;
+    }
+
+    private void refreshMonthly(){
+        this.monthlyOrdersDelivered = 0;
+        this.monthlyOrdersIncome = 0;
+    }
+
+    private void refreshTotal(){
+        this.totalOrdersDelivered = 0;
+        this.totalOrdersIncome = 0;
+    }
 
 }

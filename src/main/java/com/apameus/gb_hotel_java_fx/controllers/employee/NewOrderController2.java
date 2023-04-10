@@ -6,6 +6,7 @@ import com.apameus.gb_hotel_java_fx.employees.Employee;
 import com.apameus.gb_hotel_java_fx.menu.Menu;
 import com.apameus.gb_hotel_java_fx.orders.Order;
 import com.apameus.gb_hotel_java_fx.serializers.OrderSerializer;
+import com.apameus.gb_hotel_java_fx.util.Initializer;
 import com.apameus.gb_hotel_java_fx.util.Util;
 import javafx.beans.property.*;
 import javafx.event.ActionEvent;
@@ -33,8 +34,6 @@ public final class NewOrderController2 implements Initializable {
         private StringProperty price;
         private IntegerProperty amount;
 
-//        private ListProperty<String> subCategories;
-//        private MapProperty<String, Menu.Option> subCategory_Options;
 
         public Example(String name, String price) {
             setName(name);
@@ -97,9 +96,9 @@ public final class NewOrderController2 implements Initializable {
     @FXML
     private Button placeOrderButton;
     @FXML
-    private Button addButton = new Button();
+    private Button addButton;
     @FXML
-    private Button removeButton = new Button();
+    private Button removeButton;
     @FXML
     private Text totalCostNumber;
     @FXML
@@ -109,16 +108,14 @@ public final class NewOrderController2 implements Initializable {
     Example rootExample = new Example("MOLON LAVE", "");
     TreeItem<Example> rootOrder = new TreeItem<>(rootExample);
     TreeItem<Example> rootMenu = new TreeItem<>(rootExample);
-    TreeItem<Example> menuSelectedItem;
     TreeItem<Example> orderSelectedItem;
+    TreeItem<Example> menuSelectedItem;
 
     List<String> names = new ArrayList<>(); //ToDo maybe i can find a better solution for this
 
-
-    public static Employee employee = LoginController.employee;
-
-
 //    private final ObservableList<Example> dataList = FXCollections.observableArrayList();
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setOrderTree();
@@ -142,13 +139,15 @@ public final class NewOrderController2 implements Initializable {
         EmployeeController.employee.addOrder(order);
         OrderSerializer.serialize(order);
 
-        notificationLabel.setText("Order placed successfully !!");
-        //ToDo empty the orderTable..
-//        rootOrder.getChildren().removeAll();
-//        rootOrder = new TreeItem<>(rootExample);
-//        setOrderTree();
+        cleanTheOrderTable();
     }
 
+    private void cleanTheOrderTable() {
+        names.clear();
+        rootOrder.getChildren().clear();
+        totalCostNumber.setText("0 €");
+        notificationLabel.setText("Order placed successfully !!");
+    }
 
 
     @FXML
@@ -163,7 +162,7 @@ public final class NewOrderController2 implements Initializable {
 
     @FXML
     public void addToTheOrder(MouseEvent mouseEvent) {
-        notificationLabel.setText("");
+        notificationLabel.setText(""); // ToDo every time the user use the ADD button, the notificationLabel is set.
 
         if (menuSelectedItem == null || !menuSelectedItem.getChildren().isEmpty()) {
             return;
@@ -180,8 +179,8 @@ public final class NewOrderController2 implements Initializable {
         }
 
         increaseAmountOfExistedItem();
-
         updateTotalCostNumber();
+
         //
 //        rootOrder.getChildren().forEach(item -> {
 //            if (item.getValue().getName().equals(menuSelectedItem.getValue().getName())) {
@@ -197,29 +196,27 @@ public final class NewOrderController2 implements Initializable {
 
     @FXML
     public void removeFromTheOrder(MouseEvent mouseEvent) {
-        if (orderSelectedItem != null){
-            for (String name : names) {
-                if (name.equals(orderSelectedItem.getValue().getName())) {
-                    if (orderSelectedItem.getValue().getAmount() <= 1){
-                        rootOrder.getChildren().remove(orderSelectedItem);
-                        names.remove(name);
+        if (orderSelectedItem == null) return;
 
-                        updateTotalCostNumber();
-                        return;
-                    }
-                    else {
-                        int realIndex = names.indexOf(name);
-                        String price = orderSelectedItem.getValue().getPrice();
-                        int amount = orderSelectedItem.getValue().getAmount() - 1;
+        for (String name : names) {
+            if (!name.equals(orderSelectedItem.getValue().getName())) continue;
 
-                        TreeItem<Example> trial = new TreeItem<>(new Example(name,price,amount));
-                        rootOrder.getChildren().set(realIndex, trial);
-
-//                        orderSelectedItem.getValue().setAmount(orderSelectedItem.getValue().getAmount() - 1);
-                    }
-                }
+            if (orderSelectedItem.getValue().getAmount() <= 1){
+                rootOrder.getChildren().remove(orderSelectedItem);
+                names.remove(name);
+                updateTotalCostNumber();
             }
+            else {
+                int realIndex = names.indexOf(name);
+                String price = orderSelectedItem.getValue().getPrice();
+                int amount = orderSelectedItem.getValue().getAmount() - 1;
+
+                TreeItem<Example> decreasedItem = new TreeItem<>(new Example(name,price,amount));
+                rootOrder.getChildren().set(realIndex, decreasedItem);
+            }
+            return;
         }
+
         updateTotalCostNumber();
     }
 
@@ -234,7 +231,7 @@ public final class NewOrderController2 implements Initializable {
     private void increaseAmountOfExistedItem() {
         String name = menuSelectedItem.getValue().getName();
         String price = menuSelectedItem.getValue().getPrice();
-        int amount = menuSelectedItem.getValue().getAmount() + 1;
+        int amount = 0; // ?
 
 
         int realIndex = 0;
@@ -246,15 +243,8 @@ public final class NewOrderController2 implements Initializable {
             }
         }
 
-        TreeItem<Example> trial = new TreeItem<>(new Example(name,price,amount));
-        rootOrder.getChildren().set(realIndex, trial);
-        //        int rowIndex = orderTreeTable.getRow(menuSelectedItem);
-//        TreeItem<Example> target = orderTreeTable.getTreeItem(rowIndex);
-//        target.getValue().setAmount(target.getValue().getAmount() + 1);
-//
-//        orderTreeTable.getTreeItem(rowIndex).getValue().setAmount(orderTreeTable.getTreeItem(rowIndex).getValue().getAmount());
-
-//        rootOrder.getChildren().get(rowIndex).getValue().setAmount(rootOrder.getChildren().get(rowIndex).getValue().getAmount());
+        TreeItem<Example> increasedItem = new TreeItem<>(new Example(name,price,amount));
+        rootOrder.getChildren().set(realIndex, increasedItem);
     }
 
 
@@ -269,7 +259,7 @@ public final class NewOrderController2 implements Initializable {
 
     private void setMenuTree() {
 
-        List<Menu.Category> categories = Launcher.menu.getCategories();
+        List<Menu.Category> categories = Initializer.menu.getCategories();
         categories.forEach( category -> {
             TreeItem<Example> category_item = new TreeItem<>(new Example(category.name(), ""));
             rootMenu.getChildren().add(category_item);
@@ -290,9 +280,6 @@ public final class NewOrderController2 implements Initializable {
         menuTreeTable.setShowRoot(false);
         nameColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>(rootExample.nameProperty().getName()));
         priceColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>(rootExample.priceProperty().getName()));
-
-//        menuTreeTable.getColumns().setAll(nameColumn, priceColumn);
-//        menuTreeTable.getColumns().addAll(nameColumn,priceColumn);
     }
 
 

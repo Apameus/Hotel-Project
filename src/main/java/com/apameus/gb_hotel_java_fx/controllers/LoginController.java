@@ -1,8 +1,9 @@
 package com.apameus.gb_hotel_java_fx.controllers;
 
-import com.apameus.gb_hotel_java_fx.Launcher;
 import com.apameus.gb_hotel_java_fx.controllers.employee.EmployeeController;
 import com.apameus.gb_hotel_java_fx.employees.Employee;
+import com.apameus.gb_hotel_java_fx.employees.Employees;
+import com.apameus.gb_hotel_java_fx.util.Initializer;
 import com.apameus.gb_hotel_java_fx.util.Util;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,22 +41,32 @@ public final class LoginController {
             notificationLabel.setText("Both fields must be fulfilled!");
         }
        else {
-            Launcher.partitions.get(0).employees.forEach(employee2 -> {
-                if (username.equals(employee2.userName) && password.equals(employee2.password)) {
-                    notificationLabel.setText("Log-in Successfully!");
-                    setEmployee();
-                    Util.changeScene("employee/employee.fxml", loginButton);
-                } else notificationLabel.setText("Wrong info!");
+            Initializer.employees.getPartitions().forEach(partition -> {
+                partition.employees.forEach(employee2 -> {
+                    if (username.equals(employee2.userName) && password.equals(employee2.password)) {
+                        notificationLabel.setText("Log-in Successfully!");
+                        setEmployee(username);
+                        Util.changeScene("employee/employee.fxml", loginButton);
+                    } else notificationLabel.setText("Wrong info!");
+                });
             });
         }
 
 
     }
 
-    private void setEmployee() {
-//        employee = Partitions.Partition.username_Id_map.get(usernameField.getText());
-        Employee employee1 = Launcher.partitions.get(0).username_Employee_map.get(usernameField.getText());
-        EmployeeController.setEmployee(employee1);
+    private void setEmployee(String username) {
+//        Employee employee1 = Initializer.employees.getPartitions()
+//                .forEach(employee -> { employee.u})
+//                .username_Employee_map.get(usernameField.getText());
+
+        for (Employees.Partition partition : Initializer.employees.getPartitions()) {
+            for (Employee employee2 : partition.employees) {
+                if (employee2.userName.equals(username)) {
+                    EmployeeController.setEmployee(employee2);
+                    return;}
+            }
+        }
     }
 
     @FXML

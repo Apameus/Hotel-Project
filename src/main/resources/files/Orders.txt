@@ -10,3 +10,15 @@ Employee_ID: 2
 Amount: 254
 Date: 2023-06-16
 
+Employee_ID: 3
+Amount: 52
+Date: 2023-04-10
+
+Employee_ID: 4
+Amount: 24
+Date: 2023-04-10
+
+Employee_ID: 1
+Amount: 95
+Date: 2023-04-10
+

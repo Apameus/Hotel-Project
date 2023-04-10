@@ -12,7 +12,7 @@ public final class Menu{
 
     public List<Category> getCategories(){return categories;}
 
-    public static void addCategory(Category category){categories.add(category);}
+    public void addCategory(Category category){categories.add(category);}
     //
 //    public static Map<String,Category> categoryName_Category = new HashMap<>();
 

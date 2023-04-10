@@ -1,28 +1,35 @@
 package com.apameus.gb_hotel_java_fx.serializers;
 
 import com.apameus.gb_hotel_java_fx.employees.Employee;
+import com.apameus.gb_hotel_java_fx.util.Initializer;
 import com.apameus.gb_hotel_java_fx.util.Util;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.apameus.gb_hotel_java_fx.employees.Partitions.*;
-import static com.apameus.gb_hotel_java_fx.employees.Partitions.partitions;
+import static com.apameus.gb_hotel_java_fx.employees.Employees.*;
 
 
 public final class EmployeeSerializer {
 
     public static void serialize(){
         List<String> lines = new ArrayList<>();
-        for (Partition partition : partitions){
+        for (Partition partition : Initializer.employees.getPartitions()){
             lines.add("#" + partition.name);
-            for (Employee employee : partition.employees) {
-                employeeFieldsAsLines(lines, employee);
-            }
+            for (Employee employee : partition.employees) { employeeFieldsAsLines(lines, employee); }
         }
         Util.saveToFile(Employee.PATH, lines);
     }
+
+//    public static void serializeWithStreamAPI(){
+//        List<String> lines = new ArrayList<>();
+//        Initializer.employees.getPartitions().forEach(partition -> {
+//            lines.add("#" + partition.name);
+//            partition.employees.forEach(employee -> employeeFieldsAsLines(lines, employee));
+//        });
+//        Util.saveToFile(Employee.PATH, lines);
+//    }
 
     private static void employeeFieldsAsLines(List<String> lines, Employee employee) {
         lines.add("\t" + "/");
@@ -53,42 +60,43 @@ public final class EmployeeSerializer {
 
     public static List<Partition> parse(){
         List<String> lines = Util.getAllLines(Employee.PATH);
-
-//        List<Partition> partitions = new ArrayList<>();
         lines.removeAll(Collections.singleton(""));
 
+        List<Partition> partitions = new ArrayList<>();
         Partition partition = new Partition();
         Employee employee = new Employee();
 
         for (String line : lines) {
             line = line.trim();
-            if (line.startsWith("#"))        partition = getPartition(partition, line);
+            if (line.startsWith("#"))        partition = getPartition(partitions, partition, line);
             else if (line.startsWith("/"))   employee = new Employee();
             else if (line.startsWith("-"))   setEmployeeInfo(partition, employee, line);
         }
+        //      DRY !
+        partition.set_Id_Employee_Map();
+        partition.set_Username_Employee_Map();
+        //
         partitions.add(partition);
-
         return partitions;
     }
 
-    private static Partition getPartition(Partition partition, String line) {
+    private static Partition getPartition(List<Partition> partitions, Partition partition, String line) {
         //TODO Refactor pls
-        if (partition.name != null) partitions.add(partition); // || name != previousName
-        //
-        // set the maps    *stupid*
-        if (partition.name != null){
-        partition.set_Id_Employee_Map(); // partition.employees = 0 !!!
-        partition.set_Username_Employee_Map();}// same sh*t
-        //
+        if (partition.name != null) {
+            partitions.add(partition);
+
+            // set the maps    *stupid*
+            partition.set_Id_Employee_Map();
+            partition.set_Username_Employee_Map();
+        }
         partition = new Partition();
         partition.name = line.split("#")[1];
         return partition;
     }
 
     private static void setEmployeeInfo(Partition partition, Employee employee, String line) {
-        String value;
         line = line.replaceAll("-", "");
-        value = line.split(" ")[1];
+        String value = line.split(" ")[1];
 
         if (line.startsWith("ID: ")) employee.ID = Integer.parseInt(value);
 
@@ -124,7 +132,6 @@ public final class EmployeeSerializer {
 
         else if (line.startsWith("Bonus: ")) {
             employee.bonus = Integer.parseInt(value);
-//            employees.add(employee);
             partition.employees.add(employee);
         }
     }
