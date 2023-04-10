@@ -1,9 +1,15 @@
 package com.apameus.gb_hotel_java_fx.employees;
 
+import com.apameus.gb_hotel_java_fx.orders.Order;
+
 import java.nio.file.Path;
 
 public final class Employee {
-    public static final Path PATH = Path.of("C:\\Users\\Ιωάννης Τζωρτζίνης\\IdeaProjects\\Georgioupolis Hotel Project\\src\\main\\resources\\Employees.txt");
+    public static final Path PATH = Path.of("C:\\Users\\Ιωάννης Τζωρτζίνης\\IdeaProjects\\GB Hotel -JAVA FX\\src\\main\\resources\\files\\Employees.txt");
+    //
+    public int ID;
+    public String userName;
+    public String password;
     //
     public String firstName;
     public String lastName;
@@ -23,6 +29,17 @@ public final class Employee {
     //
     public int salary;
     public int bonus;
+
+    public void addOrder(Order order) {
+        this.dailyOrdersDelivered ++;
+        this.monthlyOrdersDelivered ++;
+        this.totalOrdersDelivered ++;
+
+        this.dailyOrdersIncome += order.amount();
+        this.monthlyOrdersIncome += order.amount();
+        this.totalOrdersIncome += order.amount();
+
+    }
 
 //    public void newOrder(){
 //        int atTable;

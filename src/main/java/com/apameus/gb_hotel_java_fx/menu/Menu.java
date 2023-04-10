@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Menu{
+public final class Menu{
     public static final Path PATH = Path.of("C:\\Users\\Ιωάννης Τζωρτζίνης\\IdeaProjects\\GB Hotel -JAVA FX\\src\\main\\resources\\files\\Menu.txt");
     private static List<Category> categories = new ArrayList<>();
 
@@ -35,6 +35,7 @@ public class Menu{
                 List<Option> options = new ArrayList<>();
                 options.add(option);
                 subCategory_Options.put(subCategory, options);
+                //ToDo if you give a sub category that doesn't exist in the List (sub_categories), it still won't put it there, but it will put it in the map.
             }
             else {
                 subCategory_Options.get(subCategory).add(option);

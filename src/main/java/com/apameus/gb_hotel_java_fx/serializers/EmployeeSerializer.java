@@ -13,7 +13,7 @@ import static com.apameus.gb_hotel_java_fx.employees.Partitions.partitions;
 
 public final class EmployeeSerializer {
 
-    public void serialize(){
+    public static void serialize(){
         List<String> lines = new ArrayList<>();
         for (Partition partition : partitions){
             lines.add("#" + partition.name);
@@ -26,6 +26,10 @@ public final class EmployeeSerializer {
 
     private static void employeeFieldsAsLines(List<String> lines, Employee employee) {
         lines.add("\t" + "/");
+        lines.add("\t\t" + "-" + "ID: " + employee.ID);
+        lines.add("\t\t" + "-" + "User_Name: " + employee.userName);
+        lines.add("\t\t" + "-" + "Password: " + employee.password);
+        lines.add("");
         lines.add("\t\t" + "-" + "First_Name: " + employee.firstName);
         lines.add("\t\t" + "-" + "Last_Name: " + employee.lastName);
         lines.add("\t\t" + "-" + "Email: " + employee.email);
@@ -47,8 +51,10 @@ public final class EmployeeSerializer {
         lines.add("\t\t" + "-" + "Bonus: " + employee.bonus);
     }
 
-    public void parse(){
+    public static List<Partition> parse(){
         List<String> lines = Util.getAllLines(Employee.PATH);
+
+//        List<Partition> partitions = new ArrayList<>();
         lines.removeAll(Collections.singleton(""));
 
         Partition partition = new Partition();
@@ -61,21 +67,36 @@ public final class EmployeeSerializer {
             else if (line.startsWith("-"))   setEmployeeInfo(partition, employee, line);
         }
         partitions.add(partition);
+
+        return partitions;
     }
 
     private static Partition getPartition(Partition partition, String line) {
-        if (partition.name != null) partitions.add(partition);
+        //TODO Refactor pls
+        if (partition.name != null) partitions.add(partition); // || name != previousName
+        //
+        // set the maps    *stupid*
+        if (partition.name != null){
+        partition.set_Id_Employee_Map(); // partition.employees = 0 !!!
+        partition.set_Username_Employee_Map();}// same sh*t
+        //
         partition = new Partition();
         partition.name = line.split("#")[1];
         return partition;
     }
 
-    private void setEmployeeInfo(Partition partition, Employee employee, String line) {
+    private static void setEmployeeInfo(Partition partition, Employee employee, String line) {
         String value;
         line = line.replaceAll("-", "");
         value = line.split(" ")[1];
 
-        if (line.startsWith("First_Name: ")) employee.firstName = value;
+        if (line.startsWith("ID: ")) employee.ID = Integer.parseInt(value);
+
+        else if (line.startsWith("User_Name: ")) employee.userName = value;
+
+        else if (line.startsWith("Password: ")) employee.password = value;
+
+        else if (line.startsWith("First_Name: ")) employee.firstName = value;
 
         else if (line.startsWith("Last_Name: ")) employee.lastName = value;
 

@@ -1,8 +1,14 @@
 package com.apameus.gb_hotel_java_fx.controllers.employee;
 
+import com.apameus.gb_hotel_java_fx.Launcher;
+import com.apameus.gb_hotel_java_fx.controllers.LoginController;
+import com.apameus.gb_hotel_java_fx.employees.Employee;
 import com.apameus.gb_hotel_java_fx.menu.Menu;
-import com.apameus.gb_hotel_java_fx.serializers.MenuSerializer;
+import com.apameus.gb_hotel_java_fx.orders.Order;
+import com.apameus.gb_hotel_java_fx.serializers.OrderSerializer;
+import com.apameus.gb_hotel_java_fx.util.Util;
 import javafx.beans.property.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -12,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -86,44 +93,69 @@ public final class NewOrderController2 implements Initializable {
     private TreeTableColumn<Example, Integer> orderItemAmount = new TreeTableColumn<>("Amount");
 
     @FXML
+    private Button cancelButton;
+    @FXML
+    private Button placeOrderButton;
+    @FXML
     private Button addButton = new Button();
     @FXML
     private Button removeButton = new Button();
     @FXML
     private Text totalCostNumber;
+    @FXML
+    private Label notificationLabel ;
 
 
     Example rootExample = new Example("MOLON LAVE", "");
     TreeItem<Example> rootOrder = new TreeItem<>(rootExample);
+    TreeItem<Example> rootMenu = new TreeItem<>(rootExample);
     TreeItem<Example> menuSelectedItem;
     TreeItem<Example> orderSelectedItem;
 
-    List<String> names = new ArrayList<>();
+    List<String> names = new ArrayList<>(); //ToDo maybe i can find a better solution for this
 
+
+    public static Employee employee = LoginController.employee;
 
 
 //    private final ObservableList<Example> dataList = FXCollections.observableArrayList();
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Menu menu = MenuSerializer.parse();
-
         setOrderTree();
-        setMenuTree(menu);
+        setMenuTree();
     }
 
-    private void updateTotalCostNumber() {
-        int totalCost = 0;
-        for (TreeItem<Example> item : rootOrder.getChildren()) {
-            totalCost += Integer.parseInt(item.getValue().getPrice()) * item.getValue().getAmount();
-        }
-        totalCostNumber.setText(Integer.toString(totalCost));
+    @FXML
+    void cancel(ActionEvent event) {
+        Util.changeScene("employee/employee.fxml", cancelButton);
     }
+
+    @FXML
+    void placeOrder(ActionEvent event) {
+        if (orderTreeTable.getTreeItem(0) == null) return;
+
+        int employeeID = EmployeeController.employee.ID;
+        int amount = Integer.parseInt(totalCostNumber.getText().split(" €")[0]);
+        LocalDate date = LocalDate.now();
+
+        Order order = new Order(employeeID, amount, date);
+        EmployeeController.employee.addOrder(order);
+        OrderSerializer.serialize(order);
+
+        notificationLabel.setText("Order placed successfully !!");
+        //ToDo empty the orderTable..
+//        rootOrder.getChildren().removeAll();
+//        rootOrder = new TreeItem<>(rootExample);
+//        setOrderTree();
+    }
+
+
 
     @FXML
     public void selectItem(MouseEvent event) {
         menuSelectedItem = menuTreeTable.getSelectionModel().getSelectedItem();
     }
+
     @FXML
     public void selectOrderItem(MouseEvent event) {
         orderSelectedItem = orderTreeTable.getSelectionModel().getSelectedItem();
@@ -131,6 +163,8 @@ public final class NewOrderController2 implements Initializable {
 
     @FXML
     public void addToTheOrder(MouseEvent mouseEvent) {
+        notificationLabel.setText("");
+
         if (menuSelectedItem == null || !menuSelectedItem.getChildren().isEmpty()) {
             return;
         }
@@ -161,32 +195,6 @@ public final class NewOrderController2 implements Initializable {
 
     }
 
-    private void increaseAmountOfExistedItem() {
-        String name = menuSelectedItem.getValue().getName();
-        String price = menuSelectedItem.getValue().getPrice();
-        int amount = menuSelectedItem.getValue().getAmount() + 1;
-
-
-        int realIndex = 0;
-        for (String nameII : names) {
-            if (nameII.equals(menuSelectedItem.getValue().getName())){
-                realIndex = names.indexOf(nameII);
-
-                amount = orderTreeTable.getTreeItem(realIndex).getValue().getAmount() + 1;
-            }
-        }
-
-        TreeItem<Example> trial = new TreeItem<>(new Example(name,price,amount));
-        rootOrder.getChildren().set(realIndex, trial);
-        //        int rowIndex = orderTreeTable.getRow(menuSelectedItem);
-//        TreeItem<Example> target = orderTreeTable.getTreeItem(rowIndex);
-//        target.getValue().setAmount(target.getValue().getAmount() + 1);
-//
-//        orderTreeTable.getTreeItem(rowIndex).getValue().setAmount(orderTreeTable.getTreeItem(rowIndex).getValue().getAmount());
-
-//        rootOrder.getChildren().get(rowIndex).getValue().setAmount(rootOrder.getChildren().get(rowIndex).getValue().getAmount());
-    }
-
     @FXML
     public void removeFromTheOrder(MouseEvent mouseEvent) {
         if (orderSelectedItem != null){
@@ -215,6 +223,40 @@ public final class NewOrderController2 implements Initializable {
         updateTotalCostNumber();
     }
 
+    private void updateTotalCostNumber() {
+        int totalCost = 0;
+        for (TreeItem<Example> item : rootOrder.getChildren()) {
+            totalCost += Integer.parseInt(item.getValue().getPrice()) * item.getValue().getAmount();
+        }
+        totalCostNumber.setText(totalCost + " €");
+    }
+
+    private void increaseAmountOfExistedItem() {
+        String name = menuSelectedItem.getValue().getName();
+        String price = menuSelectedItem.getValue().getPrice();
+        int amount = menuSelectedItem.getValue().getAmount() + 1;
+
+
+        int realIndex = 0;
+        for (String nameII : names) {
+            if (nameII.equals(menuSelectedItem.getValue().getName())){
+                realIndex = names.indexOf(nameII);
+
+                amount = orderTreeTable.getTreeItem(realIndex).getValue().getAmount() + 1;
+            }
+        }
+
+        TreeItem<Example> trial = new TreeItem<>(new Example(name,price,amount));
+        rootOrder.getChildren().set(realIndex, trial);
+        //        int rowIndex = orderTreeTable.getRow(menuSelectedItem);
+//        TreeItem<Example> target = orderTreeTable.getTreeItem(rowIndex);
+//        target.getValue().setAmount(target.getValue().getAmount() + 1);
+//
+//        orderTreeTable.getTreeItem(rowIndex).getValue().setAmount(orderTreeTable.getTreeItem(rowIndex).getValue().getAmount());
+
+//        rootOrder.getChildren().get(rowIndex).getValue().setAmount(rootOrder.getChildren().get(rowIndex).getValue().getAmount());
+    }
+
 
 
     private void setOrderTree() {
@@ -225,14 +267,12 @@ public final class NewOrderController2 implements Initializable {
         orderItemAmount.setCellValueFactory(new TreeItemPropertyValueFactory<>(rootExample.amountProperty().getName()));
     }
 
-    private void setMenuTree(Menu menu) {
-        Example rootExample = new Example("MOLON LAVE", "");
-        TreeItem<Example> root = new TreeItem<>(rootExample);
+    private void setMenuTree() {
 
-        List<Menu.Category> categories = menu.getCategories();
+        List<Menu.Category> categories = Launcher.menu.getCategories();
         categories.forEach( category -> {
             TreeItem<Example> category_item = new TreeItem<>(new Example(category.name(), ""));
-            root.getChildren().add(category_item);
+            rootMenu.getChildren().add(category_item);
 
             category.subCategories().forEach(subCategory -> {
                 TreeItem<Example> subCategory_item = new TreeItem<>(new Example(subCategory, ""));
@@ -246,7 +286,7 @@ public final class NewOrderController2 implements Initializable {
             });
         });
 
-        menuTreeTable.setRoot(root);
+        menuTreeTable.setRoot(rootMenu);
         menuTreeTable.setShowRoot(false);
         nameColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>(rootExample.nameProperty().getName()));
         priceColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>(rootExample.priceProperty().getName()));

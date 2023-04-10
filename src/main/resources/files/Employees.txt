@@ -1,5 +1,9 @@
 #RESTAURANT
 	/
+		-ID: 1
+		-User_Name: stav
+		-Password: stav123
+
 		-First_Name: Stavroula
 		-Last_Name: Xatzixristou
 		-Email: stav@gmail.com
@@ -20,6 +24,10 @@
 		-Salary: 720
 		-Bonus: 0
 	/
+		-ID: 2
+		-User_Name: dim
+		-Password: dim123
+
 		-First_Name: Dimitra
 		-Last_Name: Titaki
 		-Email: titaki@gmail.com
@@ -41,6 +49,10 @@
 		-Bonus: 20
 #BAR
 	/
+		-ID: 3
+		-User_Name: xrist
+		-Password: xrist123
+
 		-First_Name: Xristina
 		-Last_Name: Manouseli
 		-Email: xristina@gmail.com

@@ -1,6 +1,7 @@
 package com.apameus.gb_hotel_java_fx.serializers;
 
 
+import com.apameus.gb_hotel_java_fx.Launcher;
 import com.apameus.gb_hotel_java_fx.menu.Menu;
 import com.apameus.gb_hotel_java_fx.util.Util;
 
@@ -10,7 +11,7 @@ public class MenuSerializer {
 
 
     public static Menu parse(){
-        Menu menu = new Menu();
+        Menu menu = new Menu(); //toDo remove this sh*t
 
         List<String> lines = Util.getAllLines(Menu.PATH);
         lines.removeAll(Collections.singleton(""));

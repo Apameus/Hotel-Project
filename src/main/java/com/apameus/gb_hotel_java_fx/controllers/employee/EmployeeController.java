@@ -1,5 +1,8 @@
 package com.apameus.gb_hotel_java_fx.controllers.employee;
 
+import com.apameus.gb_hotel_java_fx.controllers.LoginController;
+import com.apameus.gb_hotel_java_fx.employees.Employee;
+import com.apameus.gb_hotel_java_fx.util.Util;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,26 +18,38 @@ import java.util.Objects;
 
 public final class EmployeeController {
 
-    public Button newOrderButton;
-    public Label dailyOrdersNumber;
-    public Label TotalOrdersNumber;
-    public Label pointsNumber;
-    public Button logOutButton;
-    public ImageView personImage;
-    private Stage stage;
-    private Parent root;
+    @FXML
+    private Label TotalOrdersNumber;
 
-    public void newOrder(ActionEvent actionEvent) throws IOException {
-        changeScene("newOrder.fxml");
+    @FXML
+    private Label dailyOrdersNumber;
+
+    @FXML
+    private Button logOutButton;
+
+    @FXML
+    private Button newOrderButton;
+
+    @FXML
+    private ImageView personImage;
+
+    @FXML
+    private Label pointsNumber;
+
+    public static Employee employee = null;
+
+    public static void setEmployee(Employee employee1){
+        employee = employee1;
     }
 
-    public void logOut(ActionEvent actionEvent) throws IOException {
-        changeScene("login.fxml");
+
+    public void newOrder(ActionEvent actionEvent) {
+        Util.changeScene("employee/newOrder2.fxml", newOrderButton);
     }
 
-    private void changeScene(String name) throws IOException {
-        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(name)));
-        stage = (Stage) logOutButton.getScene().getWindow();
-        stage.setScene(new Scene(root));
+    public void logOut(ActionEvent actionEvent) {
+        Util.changeScene("login.fxml", newOrderButton);
     }
+
+
 }
