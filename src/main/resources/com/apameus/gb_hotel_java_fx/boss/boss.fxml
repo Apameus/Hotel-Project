@@ -9,14 +9,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #EDF1D6;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.apameus.gb_hotel_java_fx.controllers.EmployeeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #EDF1D6;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.apameus.gb_hotel_java_fx.controllers.boss.BossController">
    <children>
       <VBox alignment="TOP_CENTER" layoutX="-6.0" prefHeight="400.0" prefWidth="173.0" style="-fx-background-color: #40513B;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="personImage" fitHeight="86.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="personImage" cache="true" fitHeight="86.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../images/stupidFace.png" />
+                  <Image url="@../../../../images/Antonis_The_Boss.jpg" />
                </image>
                <VBox.margin>
                   <Insets bottom="5.0" top="15.0" />
@@ -91,12 +92,137 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="56.0" prefWidth="111.0">
                <children>
-                  <Label prefHeight="20.0" prefWidth="115.0" text="Active Employees:">
+                  <Label prefHeight="20.0" prefWidth="115.0" text="Active Employees:" textAlignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
                   <Label fx:id="pointsNumber" text="23" textFill="#7149c6">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <Text fill="RED" layoutX="224.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="STATISTICS">
+         <font>
+            <Font name="Colonna MT" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="partitionA" fill="RED" layoutX="224.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Roof Top">
+         <font>
+            <Font name="Colonna MT" size="24.0" />
+         </font>
+      </Text>
+      <HBox alignment="CENTER_LEFT" layoutX="216.0" layoutY="200.0" prefHeight="56.0" prefWidth="356.0" style="-fx-background-color: #E6EBC6;">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Daily Orders:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="aPartition_dailyOrdersNumber" text="7" textFill="#fe6244">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Daily Income:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="aPartition_dailyOrdersIncome" text="274" textFill="#fc2947">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="56.0" prefWidth="111.0">
+               <children>
+                  <Label prefHeight="20.0" prefWidth="103.0" text="Monthly Orders:" textAlignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="aPartition_mothlyOrdersNumber" text="217" textFill="#7149c6">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <Text fx:id="partitionB" fill="RED" layoutX="224.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spa">
+         <font>
+            <Font name="Colonna MT" size="24.0" />
+         </font>
+      </Text>
+      <HBox alignment="CENTER_LEFT" layoutX="216.0" layoutY="318.0" prefHeight="56.0" prefWidth="356.0" style="-fx-background-color: #E6EBC6;">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Daily Orders:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="bPartition_dailyOrdersNumber" text="1" textFill="#fe6244">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Daily Income:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="bPartition_dailyOrdersIncome" text="13" textFill="#fc2947">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="56.0" prefWidth="111.0">
+               <children>
+                  <Label prefHeight="20.0" prefWidth="104.0" text="Monthly Orders:" textAlignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="bPartition_mothlyOrdersNumber" text="32" textFill="#7149c6">
                      <font>
                         <Font size="25.0" />
                      </font>

@@ -37,13 +37,12 @@ public final class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        if (username.isEmpty() || password.isBlank()){
-            notificationLabel.setText("Both fields must be fulfilled!");
-        }
-       else {
+        if (username.isEmpty() || password.isBlank())  notificationLabel.setText("Both fields must be fulfilled!");
+        else if (username.equals("antonis") && password.equals("theboss"))  Util.changeScene("boss/boss.fxml", loginButton);
+        else {
             Initializer.employees.getPartitions().forEach(partition -> {
-                partition.employees.forEach(employee2 -> {
-                    if (username.equals(employee2.userName) && password.equals(employee2.password)) {
+                partition.employees.forEach(employee -> {
+                    if (username.equals(employee.userName) && password.equals(employee.password)) {
                         notificationLabel.setText("Log-in Successfully!");
                         setEmployee(username);
                         Util.changeScene("employee/employee.fxml", loginButton);
@@ -56,15 +55,22 @@ public final class LoginController {
     }
 
     private void setEmployee(String username) {
-//        Employee employee1 = Initializer.employees.getPartitions()
-//                .forEach(employee -> { employee.u})
-//                .username_Employee_map.get(usernameField.getText());
+//        Initializer.employees.getPartitions().forEach(partition -> {
+//                    partition.employees.forEach(employee -> {
+//                        if (employee.userName.equals(username)){
+//                            EmployeeController.setEmployee(employee);
+//                            return;
+//                        }
+//                    });
+//                });
+
 
         for (Employees.Partition partition : Initializer.employees.getPartitions()) {
-            for (Employee employee2 : partition.employees) {
-                if (employee2.userName.equals(username)) {
-                    EmployeeController.setEmployee(employee2);
-                    return;}
+            for (Employee employee : partition.employees) {
+                if (employee.userName.equals(username)) {
+                    EmployeeController.setEmployee(employee);
+                    return;
+                }
             }
         }
     }

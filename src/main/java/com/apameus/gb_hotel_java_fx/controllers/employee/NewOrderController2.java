@@ -1,8 +1,5 @@
 package com.apameus.gb_hotel_java_fx.controllers.employee;
 
-import com.apameus.gb_hotel_java_fx.Launcher;
-import com.apameus.gb_hotel_java_fx.controllers.LoginController;
-import com.apameus.gb_hotel_java_fx.employees.Employee;
 import com.apameus.gb_hotel_java_fx.menu.Menu;
 import com.apameus.gb_hotel_java_fx.orders.Order;
 import com.apameus.gb_hotel_java_fx.serializers.OrderSerializer;

@@ -16,6 +16,7 @@ public final class Initializer {
 
     public static final Employees employees = new Employees();
 
+
     public static void initialize() {
         employees.setPartitions(EmployeeSerializer.parse());
         employees.updateMap();
