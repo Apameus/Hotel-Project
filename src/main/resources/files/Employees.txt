@@ -21,7 +21,7 @@
 
 		-Points: 0
 
-		-Salary: 720
+		-Salary: 820
 		-Bonus: 0
 	/
 		-ID: 2
@@ -45,7 +45,7 @@
 
 		-Points: 40
 
-		-Salary: 720
+		-Salary: 690
 		-Bonus: 20
 #BAR
 	/
@@ -61,17 +61,17 @@
 		-Registered_To_App: 03/06/2023
 
 		-Daily_Orders_Delivered: 7
-		-Monthly_Orders_Delivered: 210
-		-Total_Orders_Delivered: 210
+		-Monthly_Orders_Delivered: 212
+		-Total_Orders_Delivered: 288
 
-		-Daily_Orders_Income: 280
-		-Monthly_Orders_Income: 8400
-		-Total_Orders_Income: 8400
+		-Daily_Orders_Income: 247
+		-Monthly_Orders_Income: 6910
+		-Total_Orders_Income: 8990
 
-		-Points: 40
+		-Points: 30
 
-		-Salary: 720
-		-Bonus: 20
+		-Salary: 710
+		-Bonus: 15
 #SPA
 	/
 		-ID: 4
@@ -85,15 +85,15 @@
 
 		-Registered_To_App: 20/06/2023
 
-		-Daily_Orders_Delivered: 7
-		-Monthly_Orders_Delivered: 210
-		-Total_Orders_Delivered: 210
+		-Daily_Orders_Delivered: 9
+		-Monthly_Orders_Delivered: 233
+		-Total_Orders_Delivered: 288
 
-		-Daily_Orders_Income: 280
-		-Monthly_Orders_Income: 8400
-		-Total_Orders_Income: 8400
+		-Daily_Orders_Income: 321
+		-Monthly_Orders_Income: 9111
+		-Total_Orders_Income: 11211
 
-		-Points: 40
+		-Points: 120
 
-		-Salary: 720
-		-Bonus: 20
+		-Salary: 770
+		-Bonus: 60

@@ -79,7 +79,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label fx:id="TotalOrdersNumber" text="100" textFill="#fc2947">
+                  <Label fx:id="totalOrdersNumber" text="100" textFill="#fc2947">
                      <font>
                         <Font size="25.0" />
                      </font>

@@ -1,7 +1,7 @@
 package com.apameus.gb_hotel_java_fx.controllers.boss;
 
 import com.apameus.gb_hotel_java_fx.employees.Employee;
-import com.apameus.gb_hotel_java_fx.employees.Employees;
+import com.apameus.gb_hotel_java_fx.employees.EmployeeList;
 import com.apameus.gb_hotel_java_fx.util.Initializer;
 import com.apameus.gb_hotel_java_fx.util.Util;
 import javafx.event.ActionEvent;
@@ -10,16 +10,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class BossController implements Initializable {
 
     @FXML
-    private Label TotalOrdersNumber;
+    public Button logOutButton;
+
+    @FXML
+    private Label gDailyIncome;
+
+    @FXML
+    private Label gTotalEmployees;
+    @FXML
+    public Label gReservationPercentage;
 
     @FXML
     private Label aPartition_dailyOrdersIncome;
@@ -28,7 +36,7 @@ public class BossController implements Initializable {
     private Label aPartition_dailyOrdersNumber;
 
     @FXML
-    private Label aPartition_mothlyOrdersNumber;
+    private Label aPartition_monthlyOrdersNumber;
 
     @FXML
     private Label bPartition_dailyOrdersIncome;
@@ -37,10 +45,7 @@ public class BossController implements Initializable {
     private Label bPartition_dailyOrdersNumber;
 
     @FXML
-    private Label bPartition_mothlyOrdersNumber;
-
-    @FXML
-    private Label dailyOrdersNumber;
+    private Label bPartition_monthlyOrdersNumber;
 
     @FXML
     private Button employeesButton;
@@ -56,9 +61,6 @@ public class BossController implements Initializable {
 
     @FXML
     private ImageView personImage;
-
-    @FXML
-    private Label pointsNumber;
 
     @FXML
     private Button reservationButton;
@@ -79,13 +81,32 @@ public class BossController implements Initializable {
         Util.changeScene("boss/menu.fxml", menuButton);
     }
 
+    @FXML
+    void logOut(ActionEvent event){Util.changeScene("login.fxml", logOutButton);}
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String partition1 = partitionA.getText();
-        String partition2 = partitionB.getText();
+        setPartitionsStatus();
+        setGeneralStatus();
+    }
+
+    private void setGeneralStatus() {
+        setTotalDailyIncome();
+        setTotalEmployees();
+    }
+
+    private void setTotalEmployees() {
+        gTotalEmployees.setText(String.valueOf(EmployeeList.countTotalEmployees()));
+    }
+
+    private void setTotalDailyIncome() {
+        gDailyIncome.setText(String.valueOf(EmployeeList.countTotalDailyIncome()));
+    }
+
+    private void setPartitionsStatus() {
+        String partition1 = partitionA.getText().replaceAll(" ", "").toUpperCase();
+        String partition2 = partitionB.getText().replaceAll(" ", "").toUpperCase();
         setPartitionStatus(partition1, 'A');
         setPartitionStatus(partition2, 'B');
-
     }
 
     private void setPartitionStatus(String name, Character ab) {
@@ -93,7 +114,7 @@ public class BossController implements Initializable {
         int dailyIncome = 0;
         int monthlyOrders = 0;
 
-        Employees.Partition partition = Initializer.employees.getMap().get(name);
+        EmployeeList.Partition partition = Initializer.employeeList.getMap().get(name);
         for (Employee employee : partition.employees) {
             dailyOrders += employee.dailyOrdersDelivered;
             dailyIncome += employee.dailyOrdersIncome;
@@ -103,12 +124,12 @@ public class BossController implements Initializable {
         if (ab.equals('A')){
             aPartition_dailyOrdersNumber.setText(String.valueOf(dailyOrders));
             aPartition_dailyOrdersIncome.setText(String.valueOf(dailyIncome));
-            aPartition_mothlyOrdersNumber.setText(String.valueOf(monthlyOrders));
+            aPartition_monthlyOrdersNumber.setText(String.valueOf(monthlyOrders));
         }
         else {
             bPartition_dailyOrdersNumber.setText(String.valueOf(dailyOrders));
             bPartition_dailyOrdersIncome.setText(String.valueOf(dailyIncome));
-            bPartition_mothlyOrdersNumber.setText(String.valueOf(monthlyOrders));
+            bPartition_monthlyOrdersNumber.setText(String.valueOf(monthlyOrders));
         }
 
     }

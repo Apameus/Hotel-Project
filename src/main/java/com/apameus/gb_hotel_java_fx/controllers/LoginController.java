@@ -2,7 +2,7 @@ package com.apameus.gb_hotel_java_fx.controllers;
 
 import com.apameus.gb_hotel_java_fx.controllers.employee.EmployeeController;
 import com.apameus.gb_hotel_java_fx.employees.Employee;
-import com.apameus.gb_hotel_java_fx.employees.Employees;
+import com.apameus.gb_hotel_java_fx.employees.EmployeeList;
 import com.apameus.gb_hotel_java_fx.util.Initializer;
 import com.apameus.gb_hotel_java_fx.util.Util;
 import javafx.event.ActionEvent;
@@ -40,7 +40,7 @@ public final class LoginController {
         if (username.isEmpty() || password.isBlank())  notificationLabel.setText("Both fields must be fulfilled!");
         else if (username.equals("antonis") && password.equals("theboss"))  Util.changeScene("boss/boss.fxml", loginButton);
         else {
-            Initializer.employees.getPartitions().forEach(partition -> {
+            Initializer.employeeList.getPartitions().forEach(partition -> {
                 partition.employees.forEach(employee -> {
                     if (username.equals(employee.userName) && password.equals(employee.password)) {
                         notificationLabel.setText("Log-in Successfully!");
@@ -65,7 +65,7 @@ public final class LoginController {
 //                });
 
 
-        for (Employees.Partition partition : Initializer.employees.getPartitions()) {
+        for (EmployeeList.Partition partition : Initializer.employeeList.getPartitions()) {
             for (Employee employee : partition.employees) {
                 if (employee.userName.equals(username)) {
                     EmployeeController.setEmployee(employee);

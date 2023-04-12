@@ -1,7 +1,10 @@
 package com.apameus.gb_hotel_java_fx.util;
 
 import com.apameus.gb_hotel_java_fx.employees.Employee;
+import com.apameus.gb_hotel_java_fx.employees.EmployeeList;
 import com.apameus.gb_hotel_java_fx.menu.Menu;
+import com.apameus.gb_hotel_java_fx.orders.Order;
+import com.apameus.gb_hotel_java_fx.serializers.EmployeeSerializer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -52,5 +55,17 @@ public final class Util {
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    public static void setOrdersInEmployees(List<Order> orders) {
+        for (EmployeeList.Partition partition : Initializer.employeeList.getPartitions()) {
+            for (Employee employee : partition.employees) {
+                for (Order order : orders) {
+                    if (employee.ID == order.employeeId()) employee.addOrder(order);
+                }
+            }
+        }
+        EmployeeSerializer.serialize();
+        Initializer.employeeList.setPartitions(EmployeeSerializer.parse());
     }
 }

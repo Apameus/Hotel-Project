@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.apameus.gb_hotel_java_fx.employees.Employees.*;
+import static com.apameus.gb_hotel_java_fx.employees.EmployeeList.*;
 
 
 public final class EmployeeSerializer {
 
     public static void serialize(){
         List<String> lines = new ArrayList<>();
-        for (Partition partition : Initializer.employees.getPartitions()){
+        for (Partition partition : Initializer.employeeList.getPartitions()){
             lines.add("#" + partition.name);
             for (Employee employee : partition.employees) { employeeFieldsAsLines(lines, employee); }
         }
@@ -72,22 +72,16 @@ public final class EmployeeSerializer {
             else if (line.startsWith("/"))   employee = new Employee();
             else if (line.startsWith("-"))   setEmployeeInfo(partition, employee, line);
         }
-        //      DRY !
-        partition.set_Id_Employee_Map();
-        partition.set_Username_Employee_Map();
-        //
+
+        setPartitionMaps(partition);
         partitions.add(partition);
         return partitions;
     }
 
     private static Partition getPartition(List<Partition> partitions, Partition partition, String line) {
-        //TODO Refactor pls
         if (partition.name != null) {
             partitions.add(partition);
-
-            // set the maps    *stupid*
-            partition.set_Id_Employee_Map();
-            partition.set_Username_Employee_Map();
+            setPartitionMaps(partition); //TODO Refactor pls
         }
         partition = new Partition();
         partition.name = line.split("#")[1];
@@ -134,5 +128,11 @@ public final class EmployeeSerializer {
             employee.bonus = Integer.parseInt(value);
             partition.employees.add(employee);
         }
+    }
+
+    private static void setPartitionMaps(Partition partition) {
+        partition.set_Id_Employee_Map();
+        partition.set_Username_Employee_Map();
+        partition.set_Fullname_Employee_Map();
     }
 }

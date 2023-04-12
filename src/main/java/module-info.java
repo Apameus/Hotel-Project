@@ -19,4 +19,7 @@ module com.apameus.gb_hotel_java_fx {
     opens com.apameus.gb_hotel_java_fx.controllers to javafx.fxml;
     exports com.apameus.gb_hotel_java_fx.controllers.employee;
     opens com.apameus.gb_hotel_java_fx.controllers.employee to javafx.fxml;
+
+    exports com.apameus.gb_hotel_java_fx.controllers.boss;
+    opens com.apameus.gb_hotel_java_fx.controllers.boss to javafx.fxml;
 }

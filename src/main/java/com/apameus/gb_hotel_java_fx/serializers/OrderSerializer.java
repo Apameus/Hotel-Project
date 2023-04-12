@@ -1,6 +1,9 @@
 package com.apameus.gb_hotel_java_fx.serializers;
 
+import com.apameus.gb_hotel_java_fx.employees.Employee;
+import com.apameus.gb_hotel_java_fx.employees.EmployeeList;
 import com.apameus.gb_hotel_java_fx.orders.Order;
+import com.apameus.gb_hotel_java_fx.util.BubbleSort;
 import com.apameus.gb_hotel_java_fx.util.Initializer;
 import com.apameus.gb_hotel_java_fx.util.Util;
 
@@ -39,7 +42,10 @@ public final class OrderSerializer{
 
     public static void serialize(List<Order> orders){
         lines = new ArrayList<>();
-
+        //
+//        BubbleSort<Order> bubbleSort = new BubbleSort<>(orders);
+//        bubbleSort.sort();
+        //
         orders.forEach(order -> {
             lines.add("Employee_ID: " + order.employeeId());
             lines.add("Amount: " + order.amount());
@@ -48,7 +54,11 @@ public final class OrderSerializer{
         });
 
         Util.saveToFile(path, lines);
+        //
+//        Util.setOrdersInEmployees(orders);
     }
+
+
 
     public static void serialize(Order order){
         lines = new ArrayList<>();

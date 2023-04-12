@@ -2,6 +2,7 @@ package com.apameus.gb_hotel_java_fx.controllers.employee;
 
 import com.apameus.gb_hotel_java_fx.menu.Menu;
 import com.apameus.gb_hotel_java_fx.orders.Order;
+import com.apameus.gb_hotel_java_fx.serializers.EmployeeSerializer;
 import com.apameus.gb_hotel_java_fx.serializers.OrderSerializer;
 import com.apameus.gb_hotel_java_fx.util.Initializer;
 import com.apameus.gb_hotel_java_fx.util.Util;
@@ -133,8 +134,10 @@ public final class NewOrderController2 implements Initializable {
         LocalDate date = LocalDate.now();
 
         Order order = new Order(employeeID, amount, date);
-        EmployeeController.employee.addOrder(order);
         OrderSerializer.serialize(order);
+
+        EmployeeController.employee.addOrder(order); // ToDo we add the order to the employee but never serialize it.
+        EmployeeSerializer.serialize();
 
         cleanTheOrderTable();
     }
@@ -153,9 +156,7 @@ public final class NewOrderController2 implements Initializable {
     }
 
     @FXML
-    public void selectOrderItem(MouseEvent event) {
-        orderSelectedItem = orderTreeTable.getSelectionModel().getSelectedItem();
-    }
+    public void selectOrderItem(MouseEvent event) { orderSelectedItem = orderTreeTable.getSelectionModel().getSelectedItem(); }
 
     @FXML
     public void addToTheOrder(MouseEvent mouseEvent) {
