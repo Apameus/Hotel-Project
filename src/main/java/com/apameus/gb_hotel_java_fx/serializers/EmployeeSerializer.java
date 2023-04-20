@@ -22,14 +22,6 @@ public final class EmployeeSerializer {
         Util.saveToFile(Employee.PATH, lines);
     }
 
-//    public static void serializeWithStreamAPI(){
-//        List<String> lines = new ArrayList<>();
-//        Initializer.employees.getPartitions().forEach(partition -> {
-//            lines.add("#" + partition.name);
-//            partition.employees.forEach(employee -> employeeFieldsAsLines(lines, employee));
-//        });
-//        Util.saveToFile(Employee.PATH, lines);
-//    }
 
     private static void employeeFieldsAsLines(List<String> lines, Employee employee) {
         lines.add("\t" + "/");
@@ -73,7 +65,7 @@ public final class EmployeeSerializer {
             else if (line.startsWith("-"))   setEmployeeInfo(partition, employee, line);
         }
 
-        setPartitionMaps(partition);
+        updatePartitionMaps(partition);
         partitions.add(partition);
         return partitions;
     }
@@ -81,7 +73,7 @@ public final class EmployeeSerializer {
     private static Partition getPartition(List<Partition> partitions, Partition partition, String line) {
         if (partition.name != null) {
             partitions.add(partition);
-            setPartitionMaps(partition); //TODO Refactor pls
+            updatePartitionMaps(partition); //TODO Refactor pls
         }
         partition = new Partition();
         partition.name = line.split("#")[1];
@@ -130,9 +122,9 @@ public final class EmployeeSerializer {
         }
     }
 
-    private static void setPartitionMaps(Partition partition) {
-        partition.set_Id_Employee_Map();
-        partition.set_Username_Employee_Map();
-        partition.set_FullName_Employee_Map();
+    private static void updatePartitionMaps(Partition partition) {
+        partition.update_id_Employee_Map();
+        partition.update_Username_Employee_Map();
+        partition.update_FullName_Employee_Map();
     }
 }

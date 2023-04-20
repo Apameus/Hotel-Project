@@ -65,6 +65,15 @@ public class BossController implements Initializable {
     private Button reservationButton;
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setPartitionsStatus();
+        setGeneralStatus();
+    }
+
+    @FXML
+    void logOut(ActionEvent event){Util.changeScene("login.fxml", logOutButton);}
+
     @FXML
     void seeEmployees(ActionEvent event) {
         Util.changeScene("boss/employees_stats.fxml", employeesButton);
@@ -74,18 +83,16 @@ public class BossController implements Initializable {
     void seeMenu(ActionEvent event) {
         Util.changeScene("boss/menu.fxml", menuButton);
     }
-
     @FXML
     void seeReservations(ActionEvent event) {
-        Util.changeScene("boss/menu.fxml", menuButton);
+
     }
 
-    @FXML
-    void logOut(ActionEvent event){Util.changeScene("login.fxml", logOutButton);}
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        setPartitionsStatus();
-        setGeneralStatus();
+    private void setPartitionsStatus() {
+        String partition1 = partitionA.getText().replaceAll(" ", "").toUpperCase();
+        String partition2 = partitionB.getText().replaceAll(" ", "").toUpperCase();
+        setPartitionStatus(partition1, 'A');
+        setPartitionStatus(partition2, 'B');
     }
 
     private void setGeneralStatus() {
@@ -101,19 +108,12 @@ public class BossController implements Initializable {
         gDailyIncome.setText(String.valueOf(EmployeeList.countTotalDailyIncome()));
     }
 
-    private void setPartitionsStatus() {
-        String partition1 = partitionA.getText().replaceAll(" ", "").toUpperCase();
-        String partition2 = partitionB.getText().replaceAll(" ", "").toUpperCase();
-        setPartitionStatus(partition1, 'A');
-        setPartitionStatus(partition2, 'B');
-    }
-
-    private void setPartitionStatus(String name, Character ab) {
+    private void setPartitionStatus(String partitionName, Character ab) {
         int dailyOrders = 0;
         int dailyIncome = 0;
         int monthlyOrders = 0;
 
-        EmployeeList.Partition partition = Initializer.employeeList.partitionName_Partition().get(name);
+        EmployeeList.Partition partition = Initializer.employeeList.partitionName_Partition().get(partitionName);
         for (Employee employee : partition.employees) {
             dailyOrders += employee.dailyOrdersDelivered;
             dailyIncome += employee.dailyOrdersIncome;

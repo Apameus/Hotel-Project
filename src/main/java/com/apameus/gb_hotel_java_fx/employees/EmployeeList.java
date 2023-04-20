@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EmployeeList {
+public final class EmployeeList {
     private List<Partition> partitions = new ArrayList<>();
     private final Map<String,Partition> partitionName_Partition = new HashMap<>();
 
@@ -78,9 +78,9 @@ public class EmployeeList {
         public Map<String, Employee> username_Employee_map = new HashMap<>(); // This map is used to retrieve the employee from a successful login
         public Map<String, Employee> fullName_Employee_Map = new HashMap<>(); //
 
-        public void set_Id_Employee_Map() {employees.forEach(employee -> id_Employee_map.put(employee.id, employee));}
-        public void set_Username_Employee_Map() {employees.forEach(employee -> username_Employee_map.put(employee.userName, employee));}
-        public void set_FullName_Employee_Map() {employees.forEach(employee -> fullName_Employee_Map.put(employee.firstName + " " + employee.lastName, employee));}
+        public void update_id_Employee_Map() {employees.forEach(employee -> id_Employee_map.put(employee.id, employee));}
+        public void update_Username_Employee_Map() {employees.forEach(employee -> username_Employee_map.put(employee.userName, employee));}
+        public void update_FullName_Employee_Map() {employees.forEach(employee -> fullName_Employee_Map.put(employee.firstName + " " + employee.lastName, employee));}
 
         // Extra functionality
         public int countEmployees(){return employees.size();}

@@ -3,7 +3,6 @@ package com.apameus.gb_hotel_java_fx.controllers;
 import com.apameus.gb_hotel_java_fx.controllers.employee.EmployeeController;
 import com.apameus.gb_hotel_java_fx.employees.Employee;
 import com.apameus.gb_hotel_java_fx.employees.EmployeeList;
-import com.apameus.gb_hotel_java_fx.util.Initializer;
 import com.apameus.gb_hotel_java_fx.util.Util;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -58,9 +58,15 @@ public class RegisterController {
             Initializer.employeeList.partitionName_Partition().get(partition.name).employees.add(employee);
             EmployeeSerializer.serialize();
             setNotification(true);
-            // todo clear the textFields
+            clear();
         }
         else setNotification(false);
+    }
+
+    private void clear() {
+        usernameField.setText("");
+        passwordField.setText("");
+        keyField.setText("");
     }
 
     private void setNotification(boolean successful) {

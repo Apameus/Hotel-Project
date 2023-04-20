@@ -19,11 +19,6 @@ import java.util.Scanner;
 
 public final class Util {
 
-    public static String getInput(String msg) {
-        System.out.println(msg);
-        return String.valueOf(new Scanner(System.in));
-    }
-
     public static List<String> getAllLines(Path path) {
         try {
             return Files.readAllLines(path);

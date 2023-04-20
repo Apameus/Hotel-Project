@@ -10,10 +10,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +28,6 @@ import java.util.ResourceBundle;
 import static com.apameus.gb_hotel_java_fx.employees.EmployeeList.*;
 
 // ToDo you need to f**king refactor this class
-    //toDo save the key for the new employee and serialize him into the file only when he actually register the remaining info and uses the key.
 public class EditEmployeesController implements Initializable {
 
     @FXML
@@ -110,7 +115,6 @@ public class EditEmployeesController implements Initializable {
             employee.id = getHigherEmployeeId() + 1;
             setUniqueKey(employee);
         }
-        // todo copy the key
     }
 
     @FXML
@@ -137,6 +141,13 @@ public class EditEmployeesController implements Initializable {
         }
     }
 
+    @FXML
+    void copyKey(MouseEvent event) {
+        StringSelection selection = new StringSelection(keyText.getText().split(" ")[1]);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(selection, selection);
+    }
+
     private void setChoiceBox() {
         List<String> partitions = new ArrayList<>();
         for (Partition partition : Initializer.employeeList.getPartitions()) {
@@ -154,6 +165,7 @@ public class EditEmployeesController implements Initializable {
     }
 
     private void showInfo() {
+        text.setText("Edit Employee");
         Employee employee = EmployeeList.getEmployee(selectedEmployee.getValue());
         firstNameTextField.setText(employee.firstName);
         lastNameTextField.setText(employee.lastName);

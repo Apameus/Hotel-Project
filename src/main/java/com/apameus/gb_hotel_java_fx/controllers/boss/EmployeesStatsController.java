@@ -21,8 +21,6 @@ public final class EmployeesStatsController implements Initializable {
     @FXML
     private TreeView<String> employeesTree;
 
-    @FXML
-    private Button removeButton;
 
     @FXML
     private Button editButton;
@@ -87,14 +85,11 @@ public final class EmployeesStatsController implements Initializable {
     }
 
     private void showInfo() { // TODO REFACTOR
-//        String[] fullName = selectedEmployee.getValue().split(" ");
-//        firstNameLabel.setText(fullName[0]);
-//        lastNameLabel.setText(fullName[1]);
-
-        EmployeeSerializer.parse(); // temp
+        EmployeeSerializer.parse(); // temporary !!!!
 
         Employee employee = null;
         for (EmployeeList.Partition partition : Initializer.employeeList.getPartitions()) {
+//            partition.update_FullName_Employee_Map(); todo we need to update the maps
             if (partition.fullName_Employee_Map.get(selectedEmployee.getValue()) != null) {
                 employee = partition.fullName_Employee_Map.get(selectedEmployee.getValue());
                 break;
@@ -131,12 +126,8 @@ public final class EmployeesStatsController implements Initializable {
     }
 
 
-    private void setTreeView() { // todo REFACTOR
-        Initializer.employeeList.getPartitions().forEach(partition -> {
-            partition.employees.forEach(employee -> {
-                root.getChildren().add(new TreeItem<>(employee.firstName + " " + employee.lastName));
-            });
-        });
+    private void setTreeView() {
+        EmployeeList.getAllEmployees().forEach(employee -> root.getChildren().add(new TreeItem<>(employee.firstName + " " + employee.lastName)));
         employeesTree.setRoot(root);
         employeesTree.setShowRoot(false);
     }
