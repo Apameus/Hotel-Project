@@ -40,39 +40,27 @@ public final class LoginController {
         if (username.isEmpty() || password.isBlank())  notificationLabel.setText("Both fields must be fulfilled!");
         else if (username.equals("antonis") && password.equals("theboss"))  Util.changeScene("boss/boss.fxml", loginButton);
         else {
-            Initializer.employeeList.getPartitions().forEach(partition -> {
-                partition.employees.forEach(employee -> {
-                    if (username.equals(employee.userName) && password.equals(employee.password)) {
-                        notificationLabel.setText("Log-in Successfully!");
-                        setEmployee(username);
-                        Util.changeScene("employee/employee.fxml", loginButton);
-                    } else notificationLabel.setText("Wrong info!");
-                });
+
+            EmployeeList.getAllEmployees().forEach(employee -> {
+                if (username.equals(employee.userName) && password.equals(employee.password)) {
+                    notificationLabel.setText("Log-in Successfully!");
+                    setEmployee(username);
+                    Util.changeScene("employee/employee.fxml", loginButton);
+                } else notificationLabel.setText("Wrong info!");
             });
+
         }
 
 
     }
 
     private void setEmployee(String username) {
-//        Initializer.employees.getPartitions().forEach(partition -> {
-//                    partition.employees.forEach(employee -> {
-//                        if (employee.userName.equals(username)){
-//                            EmployeeController.setEmployee(employee);
-//                            return;
-//                        }
-//                    });
-//                });
-
-
-        for (EmployeeList.Partition partition : Initializer.employeeList.getPartitions()) {
-            for (Employee employee : partition.employees) {
-                if (employee.userName.equals(username)) {
-                    EmployeeController.setEmployee(employee);
-                    return;
-                }
+        EmployeeList.getAllEmployees().forEach(employee ->{
+            if (employee.userName.equals(username)) {
+                EmployeeController.setEmployee(employee);
+                return;
             }
-        }
+        });
     }
 
     @FXML

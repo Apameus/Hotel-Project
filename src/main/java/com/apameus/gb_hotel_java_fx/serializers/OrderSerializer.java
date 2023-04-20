@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public final class OrderSerializer{
+public class OrderSerializer{
     public static final Path path = Path.of("C:\\Users\\Ιωάννης Τζωρτζίνης\\IdeaProjects\\GB Hotel -JAVA FX\\src\\main\\resources\\files\\Orders.txt");
     private static List<String> lines = new ArrayList<>();
 
@@ -49,7 +49,7 @@ public final class OrderSerializer{
         orders.forEach(order -> {
             lines.add("Employee_ID: " + order.employeeId());
             lines.add("Amount: " + order.amount());
-            lines.add("Date: " + order.date());
+            lines.add("Date: " + order.date());   // todo set the desired format
             lines.add("");
         });
 
@@ -65,5 +65,4 @@ public final class OrderSerializer{
         Initializer.orders.add(order);
         serialize(Initializer.orders);
     }
-
 }

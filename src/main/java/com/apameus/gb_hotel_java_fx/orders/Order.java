@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 public record Order(int employeeId, int amount, LocalDate date) implements Comparable<Order>{
 
-
     @Override
     public int compareTo(Order o) {
         // sort by id
@@ -12,4 +11,6 @@ public record Order(int employeeId, int amount, LocalDate date) implements Compa
         else if (this.employeeId < o.employeeId) return -1;
         else return 0;
     }
+
+
 }

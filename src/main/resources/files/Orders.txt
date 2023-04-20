@@ -54,3 +54,47 @@ Employee_ID: 4
 Amount: 20
 Date: 2023-04-13
 
+Employee_ID: 1
+Amount: 132
+Date: 2023-04-13
+
+Employee_ID: 1
+Amount: 36
+Date: 2023-04-13
+
+Employee_ID: 4
+Amount: 166
+Date: 2023-04-14
+
+Employee_ID: 4
+Amount: 63
+Date: 2023-04-15
+
+Employee_ID: 4
+Amount: 60
+Date: 2023-04-17
+
+Employee_ID: 5
+Amount: 15
+Date: 2023-04-19
+
+Employee_ID: 4
+Amount: 38
+Date: 2023-04-19
+
+Employee_ID: 5
+Amount: 144
+Date: 2023-04-20
+
+Employee_ID: 5
+Amount: 144
+Date: 2023-04-20
+
+Employee_ID: 5
+Amount: 48
+Date: 2023-04-20
+
+Employee_ID: 5
+Amount: 8
+Date: 2023-04-20
+

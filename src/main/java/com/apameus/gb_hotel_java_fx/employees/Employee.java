@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public final class Employee {
     public static final Path PATH = Path.of("C:\\Users\\Ιωάννης Τζωρτζίνης\\IdeaProjects\\GB Hotel -JAVA FX\\src\\main\\resources\\files\\Employees.txt");
     //
-    public int ID;
+    public int id;
     public String userName;
     public String password;
     //

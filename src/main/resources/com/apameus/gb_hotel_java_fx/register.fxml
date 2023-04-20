@@ -56,17 +56,17 @@
                   <Font size="36.0" />
                </font>
             </Text>
-            <Label fx:id="notificationLabel" layoutX="65.0" layoutY="258.0" prefHeight="20.0" prefWidth="251.0" textFill="RED">
-               <font>
-                  <Font name="System Bold Italic" size="14.0" />
-               </font>
-            </Label>
             <Label layoutX="31.0" layoutY="228.0" text="Key" textFill="#eae7b1">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <PasswordField fx:id="keyField" layoutX="166.0" layoutY="231.0" promptText="H2k42pCMn" />
+            <TextField fx:id="keyField" layoutX="166.0" layoutY="231.0" promptText="H2k42pCMn" />
+            <Label fx:id="notificationLabel" layoutX="179.0" layoutY="355.0" textFill="#00c5ff">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">

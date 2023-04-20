@@ -1,16 +1,12 @@
 package com.apameus.gb_hotel_java_fx.util;
 
-import com.apameus.gb_hotel_java_fx.employees.Employee;
 import com.apameus.gb_hotel_java_fx.employees.EmployeeList;
-import com.apameus.gb_hotel_java_fx.menu.Menu;
 import com.apameus.gb_hotel_java_fx.orders.Order;
 import com.apameus.gb_hotel_java_fx.serializers.EmployeeSerializer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -19,7 +15,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
 public final class Util {
@@ -57,14 +52,17 @@ public final class Util {
         }
     }
 
+    /**
+     * Sets for every employee, the order status (that is parsed from the order.txt).
+     * Also serialize the Employees.txt with the new status & updates the active employeeList.
+     * @param orders the orderList parsed from the txt file.
+     */
     public static void setOrdersInEmployees(List<Order> orders) {
-        for (EmployeeList.Partition partition : Initializer.employeeList.getPartitions()) {
-            for (Employee employee : partition.employees) {
-                for (Order order : orders) {
-                    if (employee.ID == order.employeeId()) employee.addOrder(order);
-                }
-            }
-        }
+        EmployeeList.getAllEmployees().forEach(employee ->
+                                orders.forEach(order -> {
+            if (employee.id == order.employeeId()) employee.addOrder(order);
+        }));
+
         EmployeeSerializer.serialize();
         Initializer.employeeList.setPartitions(EmployeeSerializer.parse());
     }

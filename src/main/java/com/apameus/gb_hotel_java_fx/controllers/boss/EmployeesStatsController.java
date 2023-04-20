@@ -1,6 +1,7 @@
 package com.apameus.gb_hotel_java_fx.controllers.boss;
 import com.apameus.gb_hotel_java_fx.employees.Employee;
 import com.apameus.gb_hotel_java_fx.employees.EmployeeList;
+import com.apameus.gb_hotel_java_fx.serializers.EmployeeSerializer;
 import com.apameus.gb_hotel_java_fx.util.Initializer;
 import com.apameus.gb_hotel_java_fx.util.Util;
 import javafx.event.ActionEvent;
@@ -10,13 +11,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public final class EmployeesController implements Initializable {
+public final class EmployeesStatsController implements Initializable {
 
     @FXML
     private TreeView<String> employeesTree;
@@ -86,15 +86,17 @@ public final class EmployeesController implements Initializable {
         if (selectedEmployee != null) showInfo();
     }
 
-    private void showInfo() {
+    private void showInfo() { // TODO REFACTOR
 //        String[] fullName = selectedEmployee.getValue().split(" ");
 //        firstNameLabel.setText(fullName[0]);
 //        lastNameLabel.setText(fullName[1]);
 
+        EmployeeSerializer.parse(); // temp
+
         Employee employee = null;
         for (EmployeeList.Partition partition : Initializer.employeeList.getPartitions()) {
-            if (partition.fullname_Employee_Map.get(selectedEmployee.getValue()) != null) {
-                employee = partition.fullname_Employee_Map.get(selectedEmployee.getValue());
+            if (partition.fullName_Employee_Map.get(selectedEmployee.getValue()) != null) {
+                employee = partition.fullName_Employee_Map.get(selectedEmployee.getValue());
                 break;
             }
         }
@@ -115,17 +117,12 @@ public final class EmployeesController implements Initializable {
         salaryLabel.setText(String.valueOf(employee.salary));
         bonusLabel.setText(String.valueOf(employee.bonus));
 
-        idLabel.setText(String.valueOf(employee.ID));
+        idLabel.setText(String.valueOf(employee.id));
     }
 
     @FXML
     void editEmployee(ActionEvent event) {
-
-    }
-
-    @FXML
-    void removeEmployee(ActionEvent event) {
-
+        Util.changeScene("boss/edit_employees.fxml", editButton);
     }
 
     @FXML
@@ -134,7 +131,7 @@ public final class EmployeesController implements Initializable {
     }
 
 
-    private void setTreeView() {
+    private void setTreeView() { // todo REFACTOR
         Initializer.employeeList.getPartitions().forEach(partition -> {
             partition.employees.forEach(employee -> {
                 root.getChildren().add(new TreeItem<>(employee.firstName + " " + employee.lastName));

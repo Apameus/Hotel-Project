@@ -33,7 +33,7 @@ public final class EmployeeSerializer {
 
     private static void employeeFieldsAsLines(List<String> lines, Employee employee) {
         lines.add("\t" + "/");
-        lines.add("\t\t" + "-" + "ID: " + employee.ID);
+        lines.add("\t\t" + "-" + "ID: " + employee.id);
         lines.add("\t\t" + "-" + "User_Name: " + employee.userName);
         lines.add("\t\t" + "-" + "Password: " + employee.password);
         lines.add("");
@@ -92,7 +92,7 @@ public final class EmployeeSerializer {
         line = line.replaceAll("-", "");
         String value = line.split(" ")[1];
 
-        if (line.startsWith("ID: ")) employee.ID = Integer.parseInt(value);
+        if (line.startsWith("ID: ")) employee.id = Integer.parseInt(value);
 
         else if (line.startsWith("User_Name: ")) employee.userName = value;
 
@@ -133,6 +133,6 @@ public final class EmployeeSerializer {
     private static void setPartitionMaps(Partition partition) {
         partition.set_Id_Employee_Map();
         partition.set_Username_Employee_Map();
-        partition.set_Fullname_Employee_Map();
+        partition.set_FullName_Employee_Map();
     }
 }

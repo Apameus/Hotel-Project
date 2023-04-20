@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -68,7 +67,7 @@ public class BossController implements Initializable {
 
     @FXML
     void seeEmployees(ActionEvent event) {
-        Util.changeScene("boss/employees.fxml", employeesButton);
+        Util.changeScene("boss/employees_stats.fxml", employeesButton);
     }
 
     @FXML
@@ -114,7 +113,7 @@ public class BossController implements Initializable {
         int dailyIncome = 0;
         int monthlyOrders = 0;
 
-        EmployeeList.Partition partition = Initializer.employeeList.getMap().get(name);
+        EmployeeList.Partition partition = Initializer.employeeList.partitionName_Partition().get(name);
         for (Employee employee : partition.employees) {
             dailyOrders += employee.dailyOrdersDelivered;
             dailyIncome += employee.dailyOrdersIncome;

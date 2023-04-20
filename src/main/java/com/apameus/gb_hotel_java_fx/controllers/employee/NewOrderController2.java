@@ -129,15 +129,15 @@ public final class NewOrderController2 implements Initializable {
     void placeOrder(ActionEvent event) {
         if (orderTreeTable.getTreeItem(0) == null) return;
 
-        int employeeID = EmployeeController.employee.ID;
+        int employeeID = EmployeeController.employee.id;
         int amount = Integer.parseInt(totalCostNumber.getText().split(" €")[0]);
         LocalDate date = LocalDate.now();
 
         Order order = new Order(employeeID, amount, date);
         OrderSerializer.serialize(order);
 
-        EmployeeController.employee.addOrder(order); // ToDo we add the order to the employee but never serialize it.
-        EmployeeSerializer.serialize();
+        EmployeeController.employee.addOrder(order);
+        EmployeeSerializer.serialize(); // ToDo we serialize the whole list for just one added order..
 
         cleanTheOrderTable();
     }

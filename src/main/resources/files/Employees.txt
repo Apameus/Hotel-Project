@@ -11,17 +11,17 @@
 
 		-Registered_To_App: 04/05/2023
 
-		-Daily_Orders_Delivered: 2
-		-Monthly_Orders_Delivered: 60
-		-Total_Orders_Delivered: 240
+		-Daily_Orders_Delivered: 4
+		-Monthly_Orders_Delivered: 62
+		-Total_Orders_Delivered: 242
 
-		-Daily_Orders_Income: 40
-		-Monthly_Orders_Income: 1200
-		-Total_Orders_Income: 4800
+		-Daily_Orders_Income: 208
+		-Monthly_Orders_Income: 1368
+		-Total_Orders_Income: 4968
 
 		-Points: 0
 
-		-Salary: 820
+		-Salary: 840
 		-Bonus: 0
 	/
 		-ID: 2
@@ -50,10 +50,10 @@
 #BAR
 	/
 		-ID: 3
-		-User_Name: xrist
-		-Password: xrist123
+		-User_Name: vag
+		-Password: vag123
 
-		-First_Name: Xristina
+		-First_Name: Vaggelia
 		-Last_Name: Manouseli
 		-Email: xristina@gmail.com
 		-Phone_Number: 6955662348
@@ -85,15 +85,15 @@
 
 		-Registered_To_App: 20/06/2023
 
-		-Daily_Orders_Delivered: 9
-		-Monthly_Orders_Delivered: 233
-		-Total_Orders_Delivered: 288
+		-Daily_Orders_Delivered: 13
+		-Monthly_Orders_Delivered: 237
+		-Total_Orders_Delivered: 292
 
-		-Daily_Orders_Income: 321
-		-Monthly_Orders_Income: 9111
-		-Total_Orders_Income: 11211
+		-Daily_Orders_Income: 648
+		-Monthly_Orders_Income: 9438
+		-Total_Orders_Income: 11538
 
 		-Points: 120
 
-		-Salary: 770
+		-Salary: 730
 		-Bonus: 60
