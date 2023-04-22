@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 
-public final class NewOrderController2 implements Initializable {
+public final class NewOrderController implements Initializable {
 
 
     public static class Example {
@@ -122,7 +122,7 @@ public final class NewOrderController2 implements Initializable {
 
     @FXML
     void cancel(ActionEvent event) {
-        Util.changeScene("employee/employee.fxml", cancelButton);
+        Util.changeScene("employee/employee_profile.fxml", cancelButton);
     }
 
     @FXML
@@ -166,12 +166,7 @@ public final class NewOrderController2 implements Initializable {
             return;
         }
         else if (!names.contains(menuSelectedItem.getValue().getName())) {
-            menuSelectedItem.getValue().setAmount(1);
-
-            rootOrder.getChildren().add(menuSelectedItem);
-
-            names.add(menuSelectedItem.getValue().getName());
-
+            addSelectedItem();
             updateTotalCostNumber();
             return;
         }
@@ -243,6 +238,12 @@ public final class NewOrderController2 implements Initializable {
 
         TreeItem<Example> increasedItem = new TreeItem<>(new Example(name,price,amount));
         rootOrder.getChildren().set(realIndex, increasedItem);
+    }
+
+    private void addSelectedItem() {
+        menuSelectedItem.getValue().setAmount(1);
+        rootOrder.getChildren().add(menuSelectedItem);
+        names.add(menuSelectedItem.getValue().getName());
     }
 
 

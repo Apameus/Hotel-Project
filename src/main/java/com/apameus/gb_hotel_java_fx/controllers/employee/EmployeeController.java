@@ -39,7 +39,7 @@ public final class EmployeeController implements Initializable {
 
 
     public void newOrder(ActionEvent actionEvent) {
-        Util.changeScene("employee/newOrder2.fxml", newOrderButton);
+        Util.changeScene("employee/newOrder.fxml", newOrderButton);
     }
 
     public void logOut(ActionEvent actionEvent) {

@@ -44,7 +44,7 @@ public final class LoginController {
                 if (username.equals(employee.userName) && password.equals(employee.password)) {
                     notificationLabel.setText("Log-in Successfully!");
                     setEmployee(username);
-                    Util.changeScene("employee/employee.fxml", loginButton);
+                    Util.changeScene("employee/employee_profile.fxml", loginButton);
                 } else notificationLabel.setText("Wrong info!");
             });
 
