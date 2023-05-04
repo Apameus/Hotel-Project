@@ -24,5 +24,5 @@ public class Launcher extends Application {
         Initializer.initialize();
         launch(args);
     }
-}
 
+}
