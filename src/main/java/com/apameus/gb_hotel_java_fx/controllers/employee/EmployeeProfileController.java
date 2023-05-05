@@ -13,7 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public final class EmployeeController implements Initializable {
+public final class EmployeeProfileController implements Initializable {
 
     @FXML
     private Label totalOrdersNumber;

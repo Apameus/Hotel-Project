@@ -1,6 +1,6 @@
 package com.apameus.gb_hotel_java_fx.controllers;
 
-import com.apameus.gb_hotel_java_fx.controllers.employee.EmployeeController;
+import com.apameus.gb_hotel_java_fx.controllers.employee.EmployeeProfileController;
 import com.apameus.gb_hotel_java_fx.employees.Employee;
 import com.apameus.gb_hotel_java_fx.employees.EmployeeList;
 import com.apameus.gb_hotel_java_fx.util.Util;
@@ -56,7 +56,7 @@ public final class LoginController {
     private void setEmployee(String username) {
         EmployeeList.getAllEmployees().forEach(employee ->{
             if (employee.userName.equals(username)) {
-                EmployeeController.setEmployee(employee);
+                EmployeeProfileController.setEmployee(employee);
                 return;
             }
         });
