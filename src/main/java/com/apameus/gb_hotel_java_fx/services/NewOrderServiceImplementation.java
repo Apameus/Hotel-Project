@@ -38,13 +38,14 @@ public final class NewOrderServiceImplementation implements NewOrderService{
 
     @Override
     public int getIndexOfExistedItem(TreeItem<Example> target, List<String> list) {
-        int realIndex = 0;
+        int realIndex;
         for (String name : list) {
             if (name.equals(target.getValue().getName())){
                 realIndex = list.indexOf(name);
+                return realIndex;
             }
         }
-        return realIndex;
+        return -1;
     }
 
 }
