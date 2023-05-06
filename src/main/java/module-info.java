@@ -10,9 +10,7 @@ module com.apameus.gb_hotel_java_fx {
     requires org.kordamp.ikonli.core;
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
-//    requires eu.hansolo.tilesfx;
     requires org.testng;
-    requires org.junit.jupiter.api;
     requires org.mockito;
     requires org.apache.commons.lang3;
 
@@ -26,4 +24,5 @@ module com.apameus.gb_hotel_java_fx {
 
     exports com.apameus.gb_hotel_java_fx.controllers.boss;
     opens com.apameus.gb_hotel_java_fx.controllers.boss to javafx.fxml;
+
 }
